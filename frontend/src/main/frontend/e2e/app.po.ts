@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class MoGeoStory {
+export class Ud3Page {
   navigateTo() {
     return browser.get('/');
   }

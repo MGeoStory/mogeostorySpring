@@ -1,0 +1,35 @@
+/*http://leafletjs.com/examples/mobile*/
+#lmap { 
+    height: 40vh;
+    width: auto; 
+    /*margin-right: 12vh;*/
+}
+
+@media (min-width: 1200px) {
+    #lmap { 
+        width: auto;
+        height:40vh;
+        margin: 0px auto;
+    }
+}
+
+
+.infoControl{
+    padding: 3px 4px;
+    font: 1rem Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.infoControl h5 {
+    margin: 0 0 2px;
+    color: #777;
+    text-align: center;
+}
+
+.resetControl{
+    color:white;
+    font-size: 1.8rem;
+}

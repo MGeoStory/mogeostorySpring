@@ -1,0 +1,13 @@
+.line1 {
+    text-indent: 2em;
+    font-size: 1.8rem;
+}
+
+.listPoints > li {
+    font-size:1.8rem;
+    margin: 1rem 0;
+}
+
+blockquote{
+    color:#26497F;
+}

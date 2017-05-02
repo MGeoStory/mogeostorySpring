@@ -45,25 +45,19 @@ export declare abstract class XSRFStrategy {
  * @experimental
  */
 export interface RequestOptionsArgs {
-    url?: string | null;
-    method?: string | RequestMethod | null;
-    /** @deprecated from 4.0.0. Use params instead. */
-    search?: string | URLSearchParams | {
-        [key: string]: any | any[];
-    } | null;
-    params?: string | URLSearchParams | {
-        [key: string]: any | any[];
-    } | null;
-    headers?: Headers | null;
+    url?: string;
+    method?: string | RequestMethod;
+    search?: string | URLSearchParams;
+    headers?: Headers;
     body?: any;
-    withCredentials?: boolean | null;
-    responseType?: ResponseContentType | null;
+    withCredentials?: boolean;
+    responseType?: ResponseContentType;
 }
 /**
  * Required structure when constructing new Request();
  */
 export interface RequestArgs extends RequestOptionsArgs {
-    url: string | null;
+    url: string;
 }
 /**
  * Interface for options to construct a Response, based on
@@ -72,10 +66,10 @@ export interface RequestArgs extends RequestOptionsArgs {
  * @experimental
  */
 export interface ResponseOptionsArgs {
-    body?: string | Object | FormData | ArrayBuffer | Blob | null;
-    status?: number | null;
-    statusText?: string | null;
-    headers?: Headers | null;
-    type?: ResponseType | null;
-    url?: string | null;
+    body?: string | Object | FormData | ArrayBuffer | Blob;
+    status?: number;
+    statusText?: string;
+    headers?: Headers;
+    type?: ResponseType;
+    url?: string;
 }

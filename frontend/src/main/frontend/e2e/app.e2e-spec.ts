@@ -1,10 +1,10 @@
-import { MoGeoStory } from './app.po';
+import { Ud3Page } from './app.po';
 
-describe('MoGeoStory App', () => {
-  let page: MoGeoStory;
+describe('ud3 App', function() {
+  let page: Ud3Page;
 
   beforeEach(() => {
-    page = new MoGeoStory();
+    page = new Ud3Page();
   });
 
   it('should display message saying app works', () => {
