@@ -18,7 +18,7 @@ let dataFormatted: Array<Object>;
     public minYear: number = 2013;
     public maxYear: number = 2016;
 
-    private RECIPT_DATA = 'src/app/data/rawdata/receipt_article_1.csv';
+    private RECIPT_DATA = '/assets/rawdata/receipt_article_1.csv';
     public yearConfig: any = {
         behaviour: 'tap',
         start: [this.minYear, this.maxYear],

@@ -19,7 +19,7 @@ let canvas: d3.Selection<any, any, any, any>;
 
 export class LineGraphComponent implements OnInit {
 
-    private RECIPT_DATA = 'src/app/data/rawdata/receipt_article_1.csv';
+    private RECIPT_DATA = '/assets/rawdata/receipt_article_1.csv';
     private lineGraphTitle: string = "";
     private lineGraphInfo: string = "";
     constructor(private mgs: MapGraphService) {
