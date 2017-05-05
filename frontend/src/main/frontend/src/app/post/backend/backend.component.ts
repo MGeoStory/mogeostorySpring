@@ -16,6 +16,7 @@ export class BackendComponent {
         console.log('clcik button');
         this.gbds.getData().subscribe(
             data => {
+                this.data =JSON.stringify(data);
                 console.log(JSON.stringify(data));
             });
     }
