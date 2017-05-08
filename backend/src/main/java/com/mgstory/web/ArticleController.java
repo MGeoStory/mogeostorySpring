@@ -15,32 +15,32 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@RestController
-@RequestMapping(value = "api/article")
+// @RestController
+// @RequestMapping(value = "api/article")
 public class ArticleController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    // private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    ArticleReopsitory repository;
+    // @Autowired
+    // ArticleReopsitory repository;
 
-    Article article = new Article();
-
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public Article getArticles() {
-        //TO DO...
-        logger.info("getArticles");
-        logger.info(repository.findAll().toString());
-        return article;
-    }
+    // Article article = new Article();
 
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Article getArticle(@PathVariable int id) {
-        //TO DO...
-        logger.info("find by id: " + id);
-        logger.info(repository.findOne(id).toString());
-        return article;
-    }
+    // @RequestMapping(value = "", method = RequestMethod.GET)
+    // public Article getArticles() {
+    //     //TO DO...
+    //     logger.info("getArticles");
+    //     logger.info(repository.findAll().toString());
+    //     return article;
+    // }
+
+
+    // @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = "application/json")
+    // public Article getArticle(@PathVariable int id) {
+    //     //TO DO...
+    //     logger.info("find by id: " + id);
+    //     logger.info(repository.findOne(id).toString());
+    //     return article;
+    // }
 }
