@@ -1,9 +1,9 @@
 package com.mgstory.domain;
  
 
-import com.fasterxml.jackson.annotation.JsonRootName;
- 
-@JsonRootName(value = "articles")
+// import com.fasterxml.jackson.annotation.JsonRootName;
+
+// @JsonRootName(value = "articles")
 public class Article{
  
     private int id;

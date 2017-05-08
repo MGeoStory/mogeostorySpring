@@ -6,12 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleService{
-    
-    public List<Article> getArticles(){
-        return 
-    }
 
-    public Article getArtivles(int id){
-        return
-    }
 }
