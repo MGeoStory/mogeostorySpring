@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.mgstory.domain.Article;
-import com.mgstory.domain.ArticleReopsitory;
+import com.mgstory.domain.ArticleRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 // // @JsonRootName(value = "articles")
 @Entity
@@ -24,18 +25,56 @@ public class Article implements Serializable {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "summary")
+    private String summary;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "kind")
+    private String kind;
+
+    @Column(name = "image_link")
+    private String image_link;
+
+    @Column(name = "tags")
+    private String tags;
+
+    @Column(name = "post_date")
+    private Date post_date;
+
     public Integer getId() {
         return id;
     }
 
-    public String getName() {
+    public String getTitle() {
         return title;
     }
 
-    public Article() {
+    public String getSummary() {
+        return summary;
     }
 
-    public Article(String title) {
-        this.title = title;
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public String getImageLink() {
+        return image_link;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public Date getPostDate() {
+        return post_date;
+    }
+
+    public Article() {
     }
 }
