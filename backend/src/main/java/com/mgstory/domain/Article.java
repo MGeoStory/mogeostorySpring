@@ -1,5 +1,4 @@
 package com.mgstory.domain;
- 
 
 import java.io.Serializable;
 
@@ -10,31 +9,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 // // @JsonRootName(value = "articles")
 @Entity
 // @Table (name = "public.articles")
-public class Article implements Serializable{
-    
+public class Article implements Serializable {
+
     private static final long serialVersionUID = 100001L;
 
     // Object-Relational Mapping => generate primary key
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
-    @Column(name ="title")
+    @Column(name = "title")
     private String title;
- 
-    public int getId(){
+
+    public Integer getId() {
         return id;
     }
 
     public String getName() {
-   	 return title;
+        return title;
     }
- 
+
     public Article() {
     }
- 
+
+    public Article(String title) {
+        this.title = title;
+    }
 }
