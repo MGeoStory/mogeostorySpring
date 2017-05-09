@@ -14,7 +14,6 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, I
     @RestResource(path = "kind", rel = "findByKind")
     public List<Article> findByKind(@Param("k") String kind);
 
-
     // Prevents POST /people and PATCH /people/:id
     @Override
     @RestResource(exported = false)

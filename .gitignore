@@ -1,8 +1,10 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
-
+### myself seeting###
+beckend/src/main/java/com/mgstory/security
 *.properties
+
 
 ### STS ###
 .apt_generated
