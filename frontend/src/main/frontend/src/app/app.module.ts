@@ -44,10 +44,10 @@ export const PostReceiptComponents = [
 ];
 
 
-//post-backend
-import { BackendComponent } from './post/backend/backend.component';
+//test what i want
+import { TestAllComponent } from './testall/test-all.component';
 export const BackendComponents = [
-  BackendComponent,
+  TestAllComponent,
 ]
 
 import { routing } from './app.routes';

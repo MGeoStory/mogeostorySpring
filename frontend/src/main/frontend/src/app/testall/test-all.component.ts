@@ -3,9 +3,9 @@ import { ArticleControllerService } from 'app/services/backend/articlesControlle
 
 @Component({
     selector: 'backend',
-    templateUrl: 'backend.component.html',
+    templateUrl: 'test-all.component.html',
 })
-export class BackendComponent {
+export class TestAllComponent {
 
     private data: string = "fail";
     constructor(private acs: ArticleControllerService) {
