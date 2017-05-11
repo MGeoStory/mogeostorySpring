@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
-export class MapGraphService {
+export class ObservableService {
 
     // Observable string sources
     private refMapClickedSource = new Subject<string>();
@@ -18,7 +18,6 @@ export class MapGraphService {
 
     // dropdown list of years
     announceRefTime(refTime: Array<string>) {
-        console.log(refTime);
         this.refTimeSource.next(refTime);
     }
     confirmRefTime(refTime: Array<string>) {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
-import { MapGraphService } from 'app/shared/map-graph.service';
+import { ObservableService } from 'app//services/frontend//observable.service';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
 let thisComponent: DropdownListComponent;
@@ -56,7 +56,7 @@ let dataFormatted: Array<Object>;
         }
     };
 
-    constructor(private mgs: MapGraphService) {
+    constructor(private mgs: ObservableService) {
     }
 
     ngOnInit() {

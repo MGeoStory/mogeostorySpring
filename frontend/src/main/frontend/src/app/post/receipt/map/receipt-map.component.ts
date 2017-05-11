@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { MapGraphService } from 'app/shared/map-graph.service';
-import { LMapSetting } from 'app/shared/lmap-setting';
+import { ObservableService } from 'app/services/frontend/observable.service';
+import { LMapSettingService } from 'app/services/frontend/lmap-setting.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ViewEncapsulation } from '@angular/core';
 import * as L from 'leaflet';
@@ -32,7 +32,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
 
     private GEOJSON_DATA: string = 'assets/geodata/country_tw-ms.json';
 
-    constructor(private mgs: MapGraphService, private lms: LMapSetting) {
+    constructor(private mgs: ObservableService, private lms: LMapSettingService) {
     }
 
     ngOnInit() {

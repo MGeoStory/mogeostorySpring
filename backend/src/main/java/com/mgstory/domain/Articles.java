@@ -13,7 +13,7 @@ import java.util.Date;
 // // @JsonRootName(value = "articles")
 @Entity
 // @Table (name = "public.articles")
-public class Article implements Serializable {
+public class Articles implements Serializable {
 
     private static final long serialVersionUID = 100001L;
 
@@ -75,6 +75,6 @@ public class Article implements Serializable {
         return post_date;
     }
 
-    public Article() {
+    public Articles() {
     }
 }

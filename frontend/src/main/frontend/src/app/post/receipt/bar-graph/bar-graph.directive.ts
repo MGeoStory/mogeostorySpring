@@ -1,8 +1,8 @@
 import { Input, OnInit, OnDestroy, Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MapGraphService } from 'app/shared/map-graph.service';
-import { GraphFrame } from 'app/shared/graph-frame';
-import { GraphCanvas } from 'app/shared/graph-canvas';
+import { ObservableService } from 'app//services/frontend//observable.service';
+import { GraphFrameService } from 'app//services/frontend//graph-frame.service';
+import { GraphCanvas } from 'app//services/frontend//graph-canvas.service';
 import * as d3 from 'd3';
 
 
@@ -19,7 +19,7 @@ let canvas: d3.Selection<any, any, any, any>;
 export class BarGraph implements OnInit {
     private graphTitle: string = "2013年1月-各縣市平均消費金額(便利商店)：";
 
-    constructor(private mgs: MapGraphService) {
+    constructor(private mgs: ObservableService) {
     }//END OF constructor
 
     ngOnInit(): void {

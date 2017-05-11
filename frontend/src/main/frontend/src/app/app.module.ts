@@ -13,8 +13,8 @@ import { ModalModule } from 'ng2-bootstrap';
 // import { NouisliderComponent } from 'ng2-nouislider';
 import { NouisliderModule } from 'ng2-nouislider';
 //sharedService
-import { MapGraphService } from './shared/map-graph.service';
-import { LMapSetting } from './shared/lmap-setting';
+import { ObservableService } from './services/frontend/observable.service';
+import { LMapSettingService } from './services/frontend/lmap-setting.service';
 
 //home-page
 import { HomeComponent } from './home/home.component';
@@ -70,8 +70,8 @@ import { routing } from './app.routes';
 
   ],
   providers: [
-    MapGraphService,
-    LMapSetting
+    ObservableService,
+    LMapSettingService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,7 @@
 import * as L from 'leaflet';
 
 //
-export class LMapSetting {
+export class LMapSettingService {
     mapboxTileLayer: L.TileLayer;
     mapboxUrl: string;
     mapboxAttribution: string;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { MapGraphService } from 'app/shared/map-graph.service';
-import { GraphFrame } from 'app/shared/graph-frame';
-import { GraphCanvas } from 'app/shared/graph-canvas';
+import { ObservableService } from 'app//services/frontend//observable.service';
+import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
+import { GraphCanvas } from 'app/services/frontend/graph-canvas.service';
 import { ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 
@@ -22,7 +22,7 @@ export class LineGraphComponent implements OnInit {
     private RECIPT_DATA = '/assets/rawdata/receipt_article_1.csv';
     private lineGraphTitle: string = "";
     private lineGraphInfo: string = "";
-    constructor(private mgs: MapGraphService) {
+    constructor(private mgs: ObservableService) {
         // canvas = gc.createCanvas(null);
     }
 

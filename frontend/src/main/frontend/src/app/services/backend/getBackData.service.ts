@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class GetBackDataService {
     // private url = 'https://test2-25905.firebaseio.com/heros.json';  // URL to web API
-    private url = '/api/article';
+    private url = '/api/articles';
     private headers: Headers = new Headers();
     constructor(private http: Http) {
         // this.headers.append('Content-Type', 'application/json');
