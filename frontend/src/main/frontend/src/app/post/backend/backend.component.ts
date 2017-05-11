@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { ArticleControllerService } from 'app/services/backend/articleController.service';
+import { ArticleControllerService } from 'app/services/backend/articlesController.service';
 
 @Component({
     selector: 'backend',
     templateUrl: 'backend.component.html',
-    providers: [ArticleControllerService]
 })
 export class BackendComponent {
 

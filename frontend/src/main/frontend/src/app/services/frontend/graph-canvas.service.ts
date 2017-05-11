@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
 
 //that's extends could work probably, but the problem is how to super(parms)?
-export class GraphCanvas extends GraphFrameService {
+export class GraphCanvasService extends GraphFrameService {
     canvas: d3.Selection<any, any, any, any>;
 
     //variable of function

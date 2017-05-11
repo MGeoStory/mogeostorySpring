@@ -10,11 +10,16 @@ import './rxjs-extensions';
 import { DropdownModule } from 'ng2-bootstrap';
 import { SelectModule } from 'ng2-select';
 import { ModalModule } from 'ng2-bootstrap';
+
 // import { NouisliderComponent } from 'ng2-nouislider';
 import { NouisliderModule } from 'ng2-nouislider';
-//sharedService
+
+//frontend Service
 import { ObservableService } from './services/frontend/observable.service';
 import { LMapSettingService } from './services/frontend/lmap-setting.service';
+
+//backend service
+import {ArticleControllerService} from './services/backend/articlesController.service';;
 
 //home-page
 import { HomeComponent } from './home/home.component';
@@ -23,7 +28,6 @@ export const singleComponents = [
   HomeComponent,
   AboutComponent
 ];
-
 
 //post-receipt
 import { PostReceiptComponent } from './post/receipt/post-receipt.component';
@@ -46,9 +50,7 @@ export const BackendComponents = [
   BackendComponent,
 ]
 
-
 import { routing } from './app.routes';
-
 
 @NgModule({
   imports: [
@@ -71,7 +73,8 @@ import { routing } from './app.routes';
   ],
   providers: [
     ObservableService,
-    LMapSettingService
+    LMapSettingService,
+    ArticleControllerService
   ],
   bootstrap: [AppComponent]
 })

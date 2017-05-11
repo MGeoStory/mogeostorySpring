@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ObservableService } from 'app//services/frontend//observable.service';
 import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
-import { GraphCanvas } from 'app/services/frontend/graph-canvas.service';
+import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import { ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 
-let gc = new GraphCanvas();
+let gc = new GraphCanvasService();
 let subscription: Subscription;
 let canvas: d3.Selection<any, any, any, any>;
 

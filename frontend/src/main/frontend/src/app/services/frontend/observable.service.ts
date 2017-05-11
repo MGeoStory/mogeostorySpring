@@ -17,7 +17,7 @@ export class ObservableService {
     refData = this.refDataSource.asObservable();
 
     // dropdown list of years
-    announceRefTime(refTime: Array<string>) {
+    announceRefTime(refTime: Array<string>) {       
         this.refTimeSource.next(refTime);
     }
     confirmRefTime(refTime: Array<string>) {
