@@ -15,7 +15,6 @@ export class ArticleControllerService {
      * @return json
      */
     getArtiles(): Observable<any> {
-        console.log('service');
         return this.http.get(this.url) // ...and calling .json() on the response to return data
             .map((res: Response) => res.json()._embedded)
             //...errors if any

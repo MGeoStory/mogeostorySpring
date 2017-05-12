@@ -21,6 +21,11 @@ import { LMapSettingService } from './services/frontend/lmap-setting.service';
 //backend service
 import {ArticleControllerService} from './services/backend/articlesController.service';;
 
+//pipes
+import {JSONtoArrayPipe} from './pipes/json-to-array.pipe';
+export const pipes = [
+  JSONtoArrayPipe
+];
 //home-page
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -42,7 +47,6 @@ export const PostReceiptComponents = [
   BarGraph,
   LineGraphComponent,
 ];
-
 
 //test what i want
 import { TestAllComponent } from './testall/test-all.component';
@@ -68,13 +72,14 @@ import { routing } from './app.routes';
     AppComponent,
     singleComponents,
     PostReceiptComponents,
-    BackendComponents
+    BackendComponents,
+    pipes
 
   ],
   providers: [
     ObservableService,
     LMapSettingService,
-    ArticleControllerService
+    ArticleControllerService,
   ],
   bootstrap: [AppComponent]
 })

@@ -39,4 +39,12 @@
     </div>
     <!--//row-->
 </div>
+
+<div class ="ngfortest">
+    <li *ngFor ="let article of articles | JsonToArrayPipe; let i = index">
+        {{article.value}}
+    </li>
+
+    
+</div>
 <!--//container-->
