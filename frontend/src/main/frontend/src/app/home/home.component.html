@@ -40,11 +40,24 @@
     <!--//row-->
 </div>
 
-<div class ="ngfortest">
-    <li *ngFor ="let article of articles | JsonToArrayPipe; let i = index">
-        {{article.value}}
-    </li>
-
-    
+<div class="ngfortest container">
+    <div class="row">
+        <template ngFor let-article [ngForOf]="articles" let-i="index">
+            <div class="clo-log-6 col-md-6">
+                <div class="thumbnail">
+                    <h1 class="page-header">
+                        {{article.title}}
+                    </h1>
+                    <p class="lead">
+                        by <a href="{{article.title}}">{{article.author}}</a>
+                    </p>
+                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{article.postDate}}</p>
+                    <hr>
+                    <img class="img-responsive" src={{article.imageLink}} alt="">
+                    <hr>
+                </div>
+            </div>
+        </template>
+    </div>
 </div>
 <!--//container-->

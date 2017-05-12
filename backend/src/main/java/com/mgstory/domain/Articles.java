@@ -43,6 +43,9 @@ public class Articles implements Serializable {
     @Column(name = "post_date")
     private Date post_date;
 
+    @Column(name = "route_link")
+    private String route_link;
+
     public Integer getId() {
         return id;
     }
@@ -73,6 +76,10 @@ public class Articles implements Serializable {
 
     public Date getPostDate() {
         return post_date;
+    }
+
+    public String getRouteLink() {
+        return route_link;
     }
 
     public Articles() {

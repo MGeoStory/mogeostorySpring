@@ -6,16 +6,18 @@ import { ArticleControllerService } from 'app/services/backend/articlesControlle
     templateUrl: 'home.component.html'
 })
 export class HomeComponent implements OnInit {
-
-    private articles: JSON;
-
+    private articles: Array<Object>;
     constructor(private acs: ArticleControllerService) {
     }
 
     ngOnInit() {
         this.acs.getArtiles().subscribe(
-            artilces => {
-                this.articles = artilces;
+            (articles: Array<Object>) => {
+                // this.articles = articles;
+                articles.forEach((d) => {
+                    // console.log(d["title"]);
+                })
+                this.articles = articles;
                 console.log(this.articles);
             }
         );
