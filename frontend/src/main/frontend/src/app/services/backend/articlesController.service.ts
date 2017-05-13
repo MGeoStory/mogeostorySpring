@@ -12,11 +12,11 @@ export class ArticleControllerService {
     }
 
     /**
-     * get all artiles 
+     * get all artiles and sort by id(key)
      * @return javascript's object
      */
     getArtiles(): Observable<Array<Object>> {
-        return this.http.get(this.url) // ...and calling .json() on the response to return a array[boject]
+        return this.http.get(this.url+"?sort=id") // ...and calling .json() on the response to return a array[boject]
             .map((res: Response) => {
                 // console.log(res.json()._embedded.articles);
                 // console.log(typeof res.json()._embedded.articles);
