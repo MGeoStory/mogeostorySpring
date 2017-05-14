@@ -152,6 +152,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
     mappingMap(): void {
         //using d3.json to read file and addTo leaflet map
         d3.json(this.GEOJSON_DATA, function (data) {
+            console.log(data);
             //remove the existed layer.
             if (map.hasLayer(layerOfGeoJSON)) {
                 map.removeLayer(layerOfGeoJSON);

@@ -26,6 +26,7 @@ public class ArticleController {
     Articles article = new Articles();
 
     // @RequestMapping(value = "", method = RequestMethod.GET)
+    
     public Iterable<Articles> findAll() {
         // logger.info("getArticles");
         // logger.info(repository.findAll());
