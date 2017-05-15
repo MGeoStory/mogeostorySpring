@@ -79,15 +79,13 @@ let colorFeature: d3.ScaleLinear<any, any>;
         return resetControl;
     }
 
-
     /**
      * crate control(window) at top-right on map
      */
     createInfoControl(): L.Control {
 
         //control will upon leaflet map
-        let infoControl = L.control.attribution({ position: 'topright' });
-
+        let infoControl = L.control.attribution({ position: 'topright'});
 
         //add HTMLElement
         infoControl.onAdd = () => {
