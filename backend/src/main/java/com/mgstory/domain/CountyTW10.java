@@ -17,6 +17,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import org.hibernate.annotations.Type;
 import com.bedatadriven.jackson.datatype.jts.*;
 // import com.vividsolutions.jts.geom.GeometryCollection;
+import com.vividsolutions.jts.io.WKBReader;
 
 @Entity
 @Table(name = "county_tw_10")
@@ -29,13 +30,18 @@ public class CountyTW10 implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer ogc_fid;
     
-    // @Column(name = "wkb_geometry",columnDefinition="geometry(Geometry,4326)")
-    @Column(name = "wkb_geometry")
-    // @Type(type="org.hibernate.spatial.GeometryType")
+    @Column(name = "wkb_geometry",columnDefinition="geometry(Geometry,4326)")
     private String wkb_geometry;
     public String getWKBGeometry() {
         return wkb_geometry;
     }
+
+
+    // @Column(name = "wkb_geometry")
+    // private String wkb_geometry;
+    // public String getWKBGeometry() {
+    //     return wkb_geometry;
+    // }
 
     @Column(name = "countyid")
     private String countyId;

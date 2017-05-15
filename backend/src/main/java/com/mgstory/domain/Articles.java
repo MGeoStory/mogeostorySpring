@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.jpa.repository.Query;
+
 import java.util.Date;
 
 // // @JsonRootName(value = "articles")
@@ -82,7 +85,6 @@ public class Articles implements Serializable {
     public String getRouteLink() {
         return route_link;
     }
-
     public Articles() {
     }
 }

@@ -13,11 +13,11 @@ export class TestAllComponent {
 
     getData() {
         console.log('clcik button');
-        this.acs.getArtiles().subscribe(
+        this.acs.getGeoJson().subscribe(
             data => {
                 console.log(data);
                 // this.data = data;
-                this.data =JSON.stringify(data["articles"][0]);
+                // this.data =JSON.stringify(data["articles"][0]);
                 // console.log(JSON.stringify(data));
             });
     }
