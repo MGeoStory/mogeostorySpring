@@ -20,6 +20,12 @@ import { LMapSettingService } from './services/frontend/lmap-setting.service';
 
 //backend service
 import {ArticleControllerService} from './services/backend/articlesController.service';;
+import {PostDiControllerService} from './services/backend/postdiController.service';;
+export const BackednServices = [
+  ArticleControllerService,
+  PostDiControllerService
+];
+
 
 //pipes
 import {JSONtoArrayPipe} from './pipes/json-to-array.pipe';
@@ -56,6 +62,15 @@ export const BackendComponents = [
 
 import { routing } from './app.routes';
 
+//post-disposable-income
+import {DisposableIncomeComponent} from './post/disposable-income/disposable-income.component';
+import { SliderBarComponent } from './post/disposable-income/slider-bar/slider-bar.component';
+export const DisposableIncomeComponents = [
+  DisposableIncomeComponent,
+  SliderBarComponent
+];
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -73,13 +88,14 @@ import { routing } from './app.routes';
     singleComponents,
     PostReceiptComponents,
     BackendComponents,
-    pipes
+    pipes,
+    SliderBarComponent
 
   ],
   providers: [
     ObservableService,
     LMapSettingService,
-    ArticleControllerService,
+    BackednServices
   ],
   bootstrap: [AppComponent]
 })

@@ -59,7 +59,6 @@ public class CountyTW10 implements Serializable {
         return ogc_fid;
     }
 
-
     public String getCountyId() {
         return countyId;
     }

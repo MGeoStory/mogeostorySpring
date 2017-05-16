@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ArticleControllerService } from 'app/services/backend/articlesController.service';
-
+import { PostDiControllerService } from 'app/services/backend/postdiController.service';
 @Component({
     selector: 'backend',
     templateUrl: 'test-all.component.html',
@@ -8,12 +8,12 @@ import { ArticleControllerService } from 'app/services/backend/articlesControlle
 export class TestAllComponent {
 
     private data: string = "fail";
-    constructor(private acs: ArticleControllerService) {
+    constructor(private acs: ArticleControllerService, private pcs: PostDiControllerService) {
     }
 
     getData() {
         console.log('clcik button');
-        this.acs.getGeoJson().subscribe(
+        this.pcs.getPostDis().subscribe(
             data => {
                 console.log(data);
                 // this.data = data;
