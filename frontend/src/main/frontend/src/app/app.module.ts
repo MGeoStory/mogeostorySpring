@@ -87,9 +87,9 @@ export const DisposableIncomeComponents = [
     AppComponent,
     singleComponents,
     PostReceiptComponents,
+    DisposableIncomeComponents,
     BackendComponents,
     pipes,
-    SliderBarComponent
 
   ],
   providers: [

@@ -1,8 +1,8 @@
 import { Input, OnInit, OnDestroy, Component } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { ObservableService } from 'app//services/frontend//observable.service';
-import { GraphFrameService } from 'app//services/frontend//graph-frame.service';
-import { GraphCanvasService } from 'app//services/frontend//graph-canvas.service';
+import { ObservableService } from 'app/services/frontend//observable.service';
+import { GraphFrameService } from 'app/services/frontend//graph-frame.service';
+import { GraphCanvasService } from 'app/services/frontend//graph-canvas.service';
 import * as d3 from 'd3';
 
 
@@ -151,7 +151,7 @@ export class BarGraph implements OnInit {
     * drwa average line and the info text
     */
     drawAvgLine(dataForDraw: Array<Object>) {
-        console.log(dataForDraw);
+        // console.log(dataForDraw);
         // let sum: number = 0;
         // let avg: number = 0;
         // dataForDraw.forEach((d) => {

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
-import { ObservableService } from 'app//services/frontend//observable.service';
+import { ObservableService } from 'app/services/frontend//observable.service';
 import { ModalDirective } from 'ng2-bootstrap/modal';
 
 let thisComponent: DropdownListComponent;
