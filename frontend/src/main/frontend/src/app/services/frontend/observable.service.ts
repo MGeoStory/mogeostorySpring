@@ -4,23 +4,25 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class ObservableService {
 
-    private observedString = new Subject<String[]>();
-    private observedNumber = new Subject<Number[]>();
-    private observedData = new Subject<Object[]>();
+    private subjectString = new Subject<String[]>();
+    private subjectNumber = new Subject<Number[]>();
+    private subjectData = new Subject<Object[]>();
+
+    observedString = this.subjectString.asObservable();
+    observedNumber = this.subjectNumber.asObservable();
+    observedData = this.subjectData.asObservable();
 
     pushDataToObserved(data: Object[]) {
-        this.observedData.next(data);
+        this.subjectData.next(data);
     };
 
     pushStringToObserved(data: String[]) {
-        this.observedString.next(data);
+        this.subjectString.next(data);
     }
 
     pushNumberToObserved(data: Number[]) {
-        this.observedNumber.next(data);
+        this.subjectNumber.next(data);
     }
-
-
 
     //////////////////////////////////
     //below variables and function are used in post/receipt, and need to refactoring in one day.

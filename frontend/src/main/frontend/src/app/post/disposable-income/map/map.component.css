@@ -1,0 +1,19 @@
+/*http://leafletjs.com/examples/mobile*/
+#lmap { 
+    height: 50vh;
+    width: auto; 
+    /*margin-right: 12vh;*/
+}
+
+@media (min-width: 1200px) {
+    #lmap { 
+        width: auto;
+        height:50vh;
+        margin: 0px auto;
+    }
+}
+
+.resetControl{
+    color:white;
+    font-size: 1.8rem;
+}

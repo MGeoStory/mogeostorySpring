@@ -65,9 +65,11 @@ import { routing } from './app.routes';
 //post-disposable-income
 import {DisposableIncomeComponent} from './post/disposable-income/disposable-income.component';
 import { SliderBarComponent } from './post/disposable-income/slider-bar/slider-bar.component';
+import { MapComponent } from './post/disposable-income/map/map.component';
 export const DisposableIncomeComponents = [
   DisposableIncomeComponent,
-  SliderBarComponent
+  SliderBarComponent,
+  MapComponent
 ];
 
 
@@ -90,6 +92,7 @@ export const DisposableIncomeComponents = [
     DisposableIncomeComponents,
     BackendComponents,
     pipes,
+    
 
   ],
   providers: [

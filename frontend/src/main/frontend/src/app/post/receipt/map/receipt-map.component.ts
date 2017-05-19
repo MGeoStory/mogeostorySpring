@@ -45,7 +45,6 @@ let colorFeature: d3.ScaleLinear<any, any>;
                 thisComponent.mappingMap();
             }
         );
-
     }//END OF ngOnInit
 
     /**
