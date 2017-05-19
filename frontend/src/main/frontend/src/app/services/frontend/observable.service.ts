@@ -4,6 +4,27 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class ObservableService {
 
+    private observedString = new Subject<String[]>();
+    private observedNumber = new Subject<Number[]>();
+    private observedData = new Subject<Object[]>();
+
+    pushDataToObserved(data: Object[]) {
+        this.observedData.next(data);
+    };
+
+    pushStringToObserved(data: String[]) {
+        this.observedString.next(data);
+    }
+
+    pushNumberToObserved(data: Number[]) {
+        this.observedNumber.next(data);
+    }
+
+
+
+    //////////////////////////////////
+    //below variables and function are used in post/receipt, and need to refactoring in one day.
+    //////////////////////////////////
     // Observable string sources
     private refMapClickedSource = new Subject<string>();
     private refTimeSource = new Subject<Array<string>>();
@@ -17,7 +38,7 @@ export class ObservableService {
     refData = this.refDataSource.asObservable();
 
     // dropdown list of years
-    announceRefTime(refTime: Array<string>) {       
+    announceRefTime(refTime: Array<string>) {
         this.refTimeSource.next(refTime);
     }
     confirmRefTime(refTime: Array<string>) {
@@ -26,6 +47,7 @@ export class ObservableService {
 
     //data formatted
     announceRefData(refData: Array<Object>) {
+        console.log("announceRefData");
         this.refDataSource.next(refData);
     }
     // confirmRefData(refData: Array<Object>) {
@@ -40,4 +62,6 @@ export class ObservableService {
     confirmRefId(refCountry: string) {
         this.refMapClickedSource.next(refCountry);
     }
+
+
 }// END OF MapGraphService

@@ -11,6 +11,7 @@ let dataFormatted: Array<Object>;
     templateUrl: 'dropdown-list.component.html',
     styleUrls: ['dropdown-list.component.css']
 }) export class DropdownListComponent implements OnInit {
+    
     @ViewChild('childModal') public childModal: ModalDirective;
 
     public yearValue: string = '2013';

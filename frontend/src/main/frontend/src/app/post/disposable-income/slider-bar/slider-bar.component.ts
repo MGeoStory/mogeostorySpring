@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostDiControllerService } from 'app/services/backend/postdiController.service';
 import * as d3 from 'd3';
 import { Observable } from 'rxjs/Observable';
-import { NouisliderModule } from 'ng2-nouislider';
+import {ObservableService} from 'app/services/frontend/observable.service';
 
 @Component({
   selector: 'post-disposable-income-slider-bar',
@@ -16,7 +16,7 @@ export class SliderBarComponent implements OnInit {
   private yearExtent: number[];
   // private enum:enum = [];
 
-  constructor(private pcs: PostDiControllerService, private ns: NouisliderModule) {
+  constructor(private pcs: PostDiControllerService, private os : ObservableService) {
     this.nouiSlider = {
       min: 0,
       max: 0,
@@ -35,7 +35,13 @@ export class SliderBarComponent implements OnInit {
     });
   };
 
+  /**
+   * monitor the user slecet in slider bar
+   * @param userSelected 
+   */
   onSlideYear(userSelected: number) {
+    console.log([userSelected]);
+    this.os.pushNumberToObserved([userSelected]);
     console.log(userSelected);
   }
 
