@@ -56,7 +56,7 @@ let dataFormatted: Array<Object>;
         }
     };
 
-    constructor(private mgs: ObservableService) {
+    constructor(private os: ObservableService) {
     }
 
     ngOnInit() {
@@ -113,7 +113,7 @@ let dataFormatted: Array<Object>;
         refTime.push(month);
         // console.log(refTime);
         //announceRefTime to title of bar-graph
-        this.mgs.announceRefTime(refTime);
+        this.os.announceRefTime(refTime);
         thisComponent.filterData(year, month, dataFormatted);
     }
 
@@ -144,15 +144,12 @@ let dataFormatted: Array<Object>;
      * filter array values and annnoumceRefData
      */
     filterData(timeSelected: string, typeSelected: string, data: Array<Object>) {
-        // console.log('filterData');
         let dataFiltered = data.filter(column => {
             if (column['發票年'] == timeSelected && column['發票月'] == typeSelected) {
                 return column;
             }
         })
         if (dataFiltered.length == 0) {
-            console.log("no data");
-
             //show the modal
             this.showChildModal();
 
@@ -162,14 +159,14 @@ let dataFormatted: Array<Object>;
                 }
             });
 
-            thisComponent.mgs.announceRefData(dataFiltered);
+            thisComponent.os.announceRefData(dataFiltered);
 
             //set the value to the latest data
             this.yearValue = '2016';
             this.monthValue = '8';
 
         } else {
-            thisComponent.mgs.announceRefData(dataFiltered);
+            thisComponent.os.announceRefData(dataFiltered);
         }
     }//END of filteredData
 };// END of Class
