@@ -14,6 +14,7 @@ export class SliderBarComponent implements OnInit {
   private show: boolean = false;
   private nouiSlider: { min: number, max: number, value: number, config: any };
   private yearExtent: number[];
+  // private enum:enum = [];
 
   constructor(private pcs: PostDiControllerService, private ns: NouisliderModule) {
     this.nouiSlider = {
@@ -56,8 +57,8 @@ export class SliderBarComponent implements OnInit {
       },
       pips: {
         mode: 'count',
-        density: 100,
-        values: this.nouiSlider.max - this.nouiSlider.min + 1,
+        values: 6,
+        density: 5,
         stepped: true
       }
     };

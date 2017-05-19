@@ -49,9 +49,9 @@ let dataFormatted: Array<Object>;
         pips: {
             mode: 'count',
             //small xias
-            density: 100,
+            values: 3,
+            density: 10,
             //number of values
-            values: 13,
             stepped: true
         }
     };
