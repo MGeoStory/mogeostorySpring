@@ -30,7 +30,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
 
 }) export class ReceiptMapComponent implements OnInit {
 
-    private GEOJSON_DATA: string = 'assets/geodata/country_tw-ms.json';
+    private GEOJSON_DATA: string = 'assets/geodata/county_tw-ms.json';
 
     constructor(private mgs: ObservableService, private lms: LMapSettingService) {
     }
@@ -149,7 +149,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
     mappingMap(): void {
         //using d3.json to read file and addTo leaflet map
         d3.json(this.GEOJSON_DATA, function (data) {
-            console.log(data);
+            // console.log(data);
             //remove the existed layer.
             if (map.hasLayer(layerOfGeoJSON)) {
                 map.removeLayer(layerOfGeoJSON);
@@ -171,6 +171,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
                     });//.layer.on
                 }//.onEachFeature
             });
+            
             //add geoJson and zoom to geoJSON
             layerOfGeoJSON.addTo(map);
             //if zoom at tiawan => set common view is better.
