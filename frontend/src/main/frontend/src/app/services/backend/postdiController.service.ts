@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PostDiControllerService {
-    private apiUrl : string = '/api';
+    private baseUrl: string = '/api';
+    private searchUrl: string = this.baseUrl + "/postdi/search";
     constructor(private http: Http) {
     }
 
@@ -15,7 +16,7 @@ export class PostDiControllerService {
      * @return javascript's object
      */
     getPostDis(): Observable<Array<Object>> {
-        return this.http.get(this.apiUrl+"/postdi?sort=id") // ...and calling .json() on the response to return a array[boject]
+        return this.http.get(this.baseUrl + "/postdi?sort=id") // ...and calling .json() on the response to return a array[boject]
             .map((res: Response) => {
                 // console.log(articles);
                 // console.log(res.json()._embedded.articles);
@@ -24,5 +25,16 @@ export class PostDiControllerService {
             })
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    /**
+     * get post di by year
+     * @param year 
+     */
+    getPostDiByYear(year: number): Observable<Object[]> {
+        return this.http.get(this.searchUrl + "/year?y=" + year)
+            .map((res: Response) => {
+                return res.json()._embedded.postdi;
+            }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 }

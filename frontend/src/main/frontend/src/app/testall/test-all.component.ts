@@ -13,11 +13,11 @@ export class TestAllComponent {
 
     getData() {
         console.log('clcik button');
-        this.pcs.getPostDis().subscribe(
+        this.pcs.getPostDiByYear(2000).subscribe(
             data => {
                 console.log(data);
                 // this.data = data;
-                // this.data =JSON.stringify(data["articles"][0]);
+                this.data =JSON.stringify(data);
                 // console.log(JSON.stringify(data));
             });
     }

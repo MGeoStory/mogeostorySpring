@@ -30,9 +30,9 @@ export class MapComponent implements OnInit {
     d3.select('#leaf-map').attr('id', MAP_ID);
     map = this.lms.initMap(MAP_ID);
     map.addControl(this.lms.addIconOfResetControll()).on('click', this.resetControl);
-    this.os.observedNumber.subscribe(
-      (number: number[]) => {
-        console.log(number);
+    this.os.observedData.subscribe(
+      (data: Object[]) => {
+        console.log(data);
       }
     );
 

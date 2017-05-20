@@ -31,6 +31,7 @@ export class SliderBarComponent implements OnInit {
       });
       this.setNouiSlider();
       this.loadingHTML();
+      this.pushDataToObserved(this.nouiSlider.value);
     });
   };
 
@@ -40,7 +41,20 @@ export class SliderBarComponent implements OnInit {
    */
   onSlideYear(userSelected: number) {
     this.os.pushNumberToObserved([userSelected]);
+    this.pushDataToObserved(userSelected);
   }
+
+  /**
+   * push data to observed by year
+   */
+  pushDataToObserved(year: number) {
+    this.pcs.getPostDiByYear(year).subscribe(
+      data => {
+        this.os.pushDataToObserved(data);
+        console.log("pushDataToObserved");
+      });
+  }
+
 
   /**
    * set the all values of nouiSlider
