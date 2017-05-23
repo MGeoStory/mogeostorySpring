@@ -20,7 +20,6 @@ export class PostDiControllerService {
             .map((res: Response) => {
                 // console.log(articles);
                 // console.log(res.json()._embedded.articles);
-
                 return res.json()._embedded.postdi;
             })
             //...errors if any
