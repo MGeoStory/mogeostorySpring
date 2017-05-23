@@ -11,6 +11,8 @@ let layersOfCounty: L.GeoJSON;
 let isFirstLoading: boolean = true;
 let colorizeFeatures: d3.ScaleLinear<any, any>;
 let valueOfFeatures: d3.Map<{}> = d3.map();
+let featuresUserClicked: L.FeatureGroup;
+let thisComponent: MapComponent;
 @Component({
   selector: 'post-disposable-income-map',
   templateUrl: 'map.component.html',
@@ -23,21 +25,20 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    thisComponent = this;
     d3.select('#leaf-map').attr('id', MAP_ID);
     map = this.lms.initMap(MAP_ID);
-    console.log(isFirstLoading);
     this.os.observedData.subscribe(
-      (dbData: d3.Map<{}>[]) => {
+      (dbData: Object[]) => {
         //use a if to avoid async error caused by mappingTwiwanByCOunty(d3) and subscribe. 
+        valueOfFeatures = this.simplifiedDbData(dbData);
+        colorizeFeatures = this.linearColorize(valueOfFeatures);
         if (isFirstLoading) {
-          console.log(dbData);
-          valueOfFeatures = this.simplifiedDbData(dbData);
-          colorizeFeatures = this.linearColorize(valueOfFeatures);
           this.mappingTaiwanByCounty(valueOfFeatures);
           isFirstLoading = false;
         } else {
-          valueOfFeatures = this.simplifiedDbData(dbData);
           this.resetLayersStyle(valueOfFeatures);
+          this.resetHighlightedFeature();
         }
       }
     );
@@ -50,7 +51,7 @@ export class MapComponent implements OnInit {
    * simplefiedDbData to d3.map {{key=countyid, value=value }}
    * @param dbData 
    */
-  simplifiedDbData(dbData: d3.Map<{}>[]) {
+  simplifiedDbData(dbData: Object[]) {
     let vof: d3.Map<{}> = d3.map();
     for (let key in dbData[0]) {
       if (key != 'twall' && key != 'year' && key != '_links') {
@@ -61,6 +62,7 @@ export class MapComponent implements OnInit {
     }
     return vof;
   }
+
   /**
    * use d3.extent and d3.scaleLinear to produce a colorize tool for features by value of each feature.
    */
@@ -89,7 +91,7 @@ export class MapComponent implements OnInit {
    * mapping Taiwan By county only once that user entre page in first time.
    */
   mappingTaiwanByCounty(valueOfFeatures: d3.Map<{}>): void {
-    console.log("mappingTaiwanByCounty");
+    // console.log("mappingTaiwanByCounty");
     d3.json(GEOJSON_DATA, (geoData) => {
       layersOfCounty = L.geoJSON(geoData, {
         style: (feature) => {
@@ -103,7 +105,10 @@ export class MapComponent implements OnInit {
         }, onEachFeature: function (feature, layer) {
           layer.on({
             click: function (e) {
-              console.log(feature.properties);
+              console.log(feature.properties["COUNTYID"]);
+              thisComponent.os.pushStringToObserved(feature.properties["COUNTYID"]);
+              thisComponent.resetHighlightedFeature();
+              thisComponent.highlightFeature(e);
             }
           });//.layer.on
         }
@@ -121,7 +126,6 @@ export class MapComponent implements OnInit {
    */
   getFillColor(countyId: string, valueOfFeatures: d3.Map<{}>) {
     let valueOfCountry: number;
-    // console.log(valueOfFeatures);
     if (valueOfFeatures.get(countyId) != null) {
       valueOfCountry = +valueOfFeatures.get(countyId);
       return colorizeFeatures(valueOfCountry);
@@ -138,5 +142,33 @@ export class MapComponent implements OnInit {
     // console.log("resetControl");
     map.fitBounds(layersOfCounty.getBounds());
   }//.. resetControl
+
+
+  /**
+   * highlight the feature that user clicked
+   */
+  highlightFeature(e: L.Event) {
+    // console.log(e.target);
+    featuresUserClicked = e.target;
+    featuresUserClicked.setStyle({
+      weight: 4,
+      color: '#666',
+      dashArray: '',
+      fillOpacity: 1
+    });
+
+    if (!L.Browser.ie && !L.Browser.edge) {
+      featuresUserClicked.bringToFront();
+    }
+  }
+
+  /**
+  * rest the highlight feature
+  */
+  resetHighlightedFeature() {
+    if (layersOfCounty.hasLayer(featuresUserClicked)) {
+      layersOfCounty.resetStyle(featuresUserClicked);
+    }
+  }
 }//.. MapComponent
 

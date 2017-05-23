@@ -51,7 +51,6 @@ export class SliderBarComponent implements OnInit {
     this.pcs.getPostDiByYear(year).subscribe(
       data => {
         this.os.pushDataToObserved(data);
-        console.log("pushDataToObserved");
       });
   }
 
