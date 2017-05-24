@@ -1,5 +1,4 @@
 import { Input, OnInit, OnDestroy, Component } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { ObservableService } from 'app/services/frontend//observable.service';
 import { GraphFrameService } from 'app/services/frontend//graph-frame.service';
 import { GraphCanvasService } from 'app/services/frontend//graph-canvas.service';
@@ -7,8 +6,6 @@ import * as d3 from 'd3';
 
 
 let gc = new GraphCanvasService();
-// let subscription: Subscription;
-//decare outside of class =>dont use this. to appoint variable
 let canvas: d3.Selection<any, any, any, any>;
 
 @Component({
@@ -80,7 +77,6 @@ export class BarGraph implements OnInit {
                 value: d['平均客單價']
             }
         });
-
         //sort data by '平均客單價'
         dataForDraw.sort(function (x, y) {
             return d3.descending(x.value, y.value);

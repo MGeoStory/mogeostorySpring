@@ -3,7 +3,7 @@ import { ObservableService } from 'app/services/frontend/observable.service';
 import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
 import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import * as d3 from 'd3';
-// import { countyIdTW } from 'app/services/frontend/countyid-tw.service';
+import { CountyIdTWService } from 'app/services/frontend/countyid-tw.service';
 let gc = new GraphCanvasService();
 let canvas: d3.Selection<any, any, any, any>;
 let valueOfCounty: Object[] = [];
@@ -18,7 +18,7 @@ let isFirstLoading: boolean = true;
 export class BarGraphComponent implements OnInit {
 
     private graphTitle: string = "worked";
-    constructor(private obs: ObservableService) { }
+    constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
 
     ngOnInit() {
         isFirstLoading = true;
@@ -45,8 +45,7 @@ export class BarGraphComponent implements OnInit {
     drawColumnGraph(valueOfCounty: Object[]): void {
         console.log(valueOfCounty);
         let maxOfData = valueOfCounty[0]['value'];
-        let names = [];
-        // for var
+        let names;
 
 
     }//.. drawColumnGraph
@@ -59,13 +58,15 @@ export class BarGraphComponent implements OnInit {
         let newObject: Object[] = [];
         for (let key in dbData[0]) {
             if (key != 'twall' && key != 'year' && key != '_links') {
-                newObject.push({ key: key.toUpperCase(), value: dbData[0][key] });
+                newObject.push({
+                    name: this.cId.getCountyName(key),
+                    value: dbData[0][key]
+                });
             }
         }
         newObject.sort((x, y) => {
             return d3.descending(x['value'], y['value']);
         })
-
         return newObject;
     }
 }

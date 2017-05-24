@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { LMapSettingService } from 'app/services/frontend/lmap-setting.service';
 import { ObservableService } from 'app/services/frontend/observable.service';
 import * as d3 from 'd3';
@@ -12,7 +12,7 @@ let isFirstLoading: boolean = true;
 let colorizeFeatures: d3.ScaleLinear<any, any>;
 let valueOfFeatures: d3.Map<{}> = d3.map();
 let featuresUserClicked: L.FeatureGroup;
-let thisComponent: MapComponent;
+
 @Component({
   selector: 'post-disposable-income-map',
   templateUrl: 'map.component.html',
@@ -25,7 +25,6 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
-    thisComponent = this;
     d3.select('#leaf-map').attr('id', MAP_ID);
     map = this.lms.initMap(MAP_ID);
     this.os.observedData.subscribe(
@@ -48,7 +47,7 @@ export class MapComponent implements OnInit {
     map.addControl(this.lms.addIconOfResetControll()).on('click', this.resetControl);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     console.log("test");
   }
 
@@ -107,13 +106,13 @@ export class MapComponent implements OnInit {
             dashArray: '3',
             weight: 1.5
           }
-        }, onEachFeature: function (feature, layer) {
+        }, onEachFeature: (feature, layer) => {
           layer.on({
-            click: function (e) {
+            click: (e) => {
               console.log(feature.properties["COUNTYID"]);
-              thisComponent.os.pushStringToObserved(feature.properties["COUNTYID"]);
-              thisComponent.resetHighlightedFeature();
-              thisComponent.highlightFeature(e);
+              this.os.pushStringToObserved(feature.properties["COUNTYID"]);
+              this.resetHighlightedFeature();
+              this.highlightFeature(e);
             }
           });//.layer.on
         }

@@ -17,18 +17,24 @@ import { NouisliderModule } from 'ng2-nouislider';
 //frontend Service
 import { ObservableService } from './services/frontend/observable.service';
 import { LMapSettingService } from './services/frontend/lmap-setting.service';
+import { CountyIdTWService } from './services/frontend/countyid-tw.service';
+export const FrontendServices = [
+  ObservableService,
+  LMapSettingService,
+  CountyIdTWService
+];
 
 //backend service
-import {ArticleControllerService} from './services/backend/articlesController.service';;
-import {PostDiControllerService} from './services/backend/postdiController.service';;
-export const BackednServices = [
+import { ArticleControllerService } from './services/backend/articlesController.service';;
+import { PostDiControllerService } from './services/backend/postdiController.service';;
+export const BackendServices = [
   ArticleControllerService,
   PostDiControllerService
 ];
 
 
 //pipes
-import {JSONtoArrayPipe} from './pipes/json-to-array.pipe';
+import { JSONtoArrayPipe } from './pipes/json-to-array.pipe';
 export const pipes = [
   JSONtoArrayPipe
 ];
@@ -63,10 +69,10 @@ export const BackendComponents = [
 import { routing } from './app.routes';
 
 //post-disposable-income
-import {DisposableIncomeComponent} from './post/disposable-income/disposable-income.component';
+import { DisposableIncomeComponent } from './post/disposable-income/disposable-income.component';
 import { SliderBarComponent } from './post/disposable-income/slider-bar/slider-bar.component';
 import { MapComponent } from './post/disposable-income/map/map.component';
-import {BarGraphComponent} from './post/disposable-income/bar-graph/bar-graph.component';
+import { BarGraphComponent } from './post/disposable-income/bar-graph/bar-graph.component';
 export const DisposableIncomeComponents = [
   DisposableIncomeComponent,
   SliderBarComponent,
@@ -94,13 +100,13 @@ export const DisposableIncomeComponents = [
     DisposableIncomeComponents,
     BackendComponents,
     pipes,
-    
+
 
   ],
   providers: [
-    ObservableService,
-    LMapSettingService,
-    BackednServices
+    BackendServices,
+    FrontendServices
+
   ],
   bootstrap: [AppComponent]
 })
