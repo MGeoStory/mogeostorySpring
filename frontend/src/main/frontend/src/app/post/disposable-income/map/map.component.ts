@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,OnDestroy } from '@angular/core';
 import { LMapSettingService } from 'app/services/frontend/lmap-setting.service';
 import { ObservableService } from 'app/services/frontend/observable.service';
 import * as d3 from 'd3';
@@ -32,6 +32,7 @@ export class MapComponent implements OnInit {
       (dbData: Object[]) => {
         //use a if to avoid async error caused by mappingTwiwanByCOunty(d3) and subscribe. 
         valueOfFeatures = this.simplifiedDbData(dbData);
+        // console.log(valueOfFeatures);
         colorizeFeatures = this.linearColorize(valueOfFeatures);
         if (isFirstLoading) {
           this.mappingTaiwanByCounty(valueOfFeatures);
@@ -45,6 +46,10 @@ export class MapComponent implements OnInit {
 
     //it's BUG, but it's good for user experience.
     map.addControl(this.lms.addIconOfResetControll()).on('click', this.resetControl);
+  }
+
+  ngOnDestroy(){
+    console.log("test");
   }
 
   /**
