@@ -66,10 +66,12 @@ import { routing } from './app.routes';
 import {DisposableIncomeComponent} from './post/disposable-income/disposable-income.component';
 import { SliderBarComponent } from './post/disposable-income/slider-bar/slider-bar.component';
 import { MapComponent } from './post/disposable-income/map/map.component';
+import {BarGraphComponent} from './post/disposable-income/bar-graph/bar-graph.component';
 export const DisposableIncomeComponents = [
   DisposableIncomeComponent,
   SliderBarComponent,
-  MapComponent
+  MapComponent,
+  BarGraphComponent
 ];
 
 
