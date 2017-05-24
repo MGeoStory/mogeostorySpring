@@ -25,7 +25,7 @@ export class BarGraphComponent implements OnInit {
 
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
-                console.log(userClicked[0]);
+                // console.log(userClicked[0]);
             }
         )
         this.obs.observedData.subscribe(
@@ -49,8 +49,6 @@ export class BarGraphComponent implements OnInit {
      * @param valueOfCounty 
      */
     drawColumnGraph(valueOfCounty: Object[]): void {
-        console.log(valueOfCounty);
-
         //return a ['name','name'....];
         gc.xScaleBand.domain(
             valueOfCounty.map((d) => {

@@ -15,7 +15,7 @@ export class CountyIdTWService {
                 E: "高雄市",
                 F: "新北市",
                 G: "宜蘭縣",
-                H: "桃園縣",
+                H: "桃園市",
                 I: "嘉義市",
                 J: "新竹縣",
                 K: "苗栗縣",

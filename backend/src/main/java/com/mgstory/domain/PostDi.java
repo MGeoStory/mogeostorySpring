@@ -31,8 +31,8 @@ public class PostDi implements Serializable {
     @Column(name = "h")
     private Integer h;
 
-    @Column(name = "l")
-    private Integer l;
+    @Column(name = "b")
+    private Integer b;
 
     @Column(name = "d")
     private Integer d;
@@ -102,8 +102,8 @@ public class PostDi implements Serializable {
         return h;
     }
 
-    public Integer getL() {
-        return l;
+    public Integer getB() {
+        return b;
     }
 
     public Integer getD() {
