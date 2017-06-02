@@ -16,6 +16,7 @@ let layerOfGeoJSON: L.GeoJSON;
 let featuresClicked: L.FeatureGroup;
 let divOfInfoControl: HTMLElement;
 let divOfResetControl: HTMLElement;
+let isFirstLoading: boolean = true;
 
 //about data
 let valueOfFeatures: d3.Map<{}>;
@@ -40,12 +41,31 @@ let colorFeature: d3.ScaleLinear<any, any>;
         this.initialMap();
         thisComponent.mgs.refData.subscribe(
             data => {
-                thisComponent.updateInfoControl(null);
-                thisComponent.getFeatureInfo(data);
-                thisComponent.mappingMap();
+                // console.log(data);
+                if (isFirstLoading) {
+                    thisComponent.updateInfoControl(null);
+                    thisComponent.getFeatureInfo(data);
+                    thisComponent.mappingMap();
+                    isFirstLoading = false;
+                } else {
+                    this.resetLayersStyle(valueOfFeatures);
+                    this.getFeatureInfo(data);
+                    thisComponent.resetHighlightedFeature();
+                }
             }
         );
     }//END OF ngOnInit
+
+
+    /**
+   * reset the color of feature and dont need render the geoJson
+   * @param dbData 
+   */
+    resetLayersStyle(valueOfFeatures: d3.Map<{}>) {
+        layerOfGeoJSON.setStyle((feature) => {
+            return { fillColor: this.getFillColor(feature.properties["COUNTYID"])}
+        });
+    }
 
     /**
      * establish a base leaf-map in website
@@ -84,7 +104,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
     createInfoControl(): L.Control {
 
         //control will upon leaflet map
-        let infoControl = L.control.attribution({ position: 'topright'});
+        let infoControl = L.control.attribution({ position: 'topright' });
 
         //add HTMLElement
         infoControl.onAdd = () => {
@@ -171,7 +191,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
                     });//.layer.on
                 }//.onEachFeature
             });
-            
+
             //add geoJson and zoom to geoJSON
             layerOfGeoJSON.addTo(map);
             //if zoom at tiawan => set common view is better.
@@ -226,10 +246,12 @@ let colorFeature: d3.ScaleLinear<any, any>;
      * if value=0 , the fill color is gray.
      */
     getFillColor(countryId: string): string {
+        console.log(countryId);
         //26 countries in Taiwan will show in map, but the data would be lack
         let valueOfCountry: number;
         if (valueOfFeatures.get(countryId) != null) {
             valueOfCountry = valueOfFeatures.get(countryId)['value'];
+            console.log(valueOfCountry);
             // console.log(valueOfCountry);
             // return rgbHex('#'+colorFeature(valueOfCountry));
             // console.log('#' + rgbHex(colorFeature(valueOfCountry)));
