@@ -40,7 +40,7 @@ export class LineGraphComponent implements OnInit {
         this.mgs.refId.subscribe(
             id => {
                 //more right margin for yAxis
-                gc.setFrameMargin(-1, -1, -1, 50)
+                gc.setFrameMargin(-1, 5, -1, 30);
                 canvas = gc.createCanvas('line-canvas', '#line-graph');
                 this.drawLineGraph(id);
                 this.lineGraphTitle = `${id}逐月平均消費金額（便利商店）:`;

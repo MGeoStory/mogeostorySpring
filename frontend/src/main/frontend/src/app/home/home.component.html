@@ -1,24 +1,20 @@
 <div class="container">
-<div class="ngfortest container">
-    <div class="row">
-        <template ngFor let-article [ngForOf]="articles" let-i="index">
-            <div class="clo-log-6 col-md-6">
-                <div class="thumbnail">
-                    <h1 class="page-header">
-                        {{article.title}}
-                    </h1>
-                    <p class="lead">
-                        create by <a href="{{article.title}}">{{article.author}}</a>
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on {{article.postDate | date}}</p>
-                    <hr>
-                    <img class="img-responsive" src={{article.imageLink}} alt="">
-                    <hr>
-                <p>{{article.summary}}</p>
-                <a class="btn btn-primary" routerLink="{{article.routeLink}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+    <div class="ngfortest container">
+        <div class="row">
+            <template ngFor let-article [ngForOf]="articles" let-i="index">
+                <div class="clo-log-6 col-md-6">
+                    <div class="thumbnail">
+                         <a routerLink="{{article.routeLink}}"><p class="atitle"> {{article.title}} </p></a>
+                        <p class="ainfo">
+                            posted on {{article.postDate | date}} | Author: <a href="{{article.title}}">{{article.author}}</a>
+                        </p>
+                        <p class="asummary"> {{article.summary}}</p>
+                        <a routerLink="{{article.routeLink}}"><img class="img-responsive" src={{article.imageLink}} alt="server error"></a>
+                        <a class="btn btn-primary clo-log-12 col-md-12 col-xs-12" routerLink="{{article.routeLink}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <hr>
+                    </div>
                 </div>
-            </div>
-        </template>
+            </template>
+        </div>
     </div>
-</div>
-<!--//container-->
+    <!--//container-->
