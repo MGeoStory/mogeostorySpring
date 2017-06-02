@@ -4,10 +4,12 @@ import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
 import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import * as d3 from 'd3';
 import { CountyIdTWService } from 'app/services/frontend/countyid-tw.service';
+
 let gc = new GraphCanvasService();
 let canvas: d3.Selection<any, any, any, any>;
 let valueOfCounty: Object[] = [];
 let isFirstLoading: boolean = true;
+
 
 @Component({
     selector: 'post-disposable-income-bar-graph',
@@ -18,6 +20,7 @@ let isFirstLoading: boolean = true;
 export class BarGraphComponent implements OnInit {
 
     private graphTitle: string = "worked";
+    private preUserClicked: string;
     constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
 
     ngOnInit() {
@@ -25,7 +28,7 @@ export class BarGraphComponent implements OnInit {
 
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
-                // console.log(userClicked[0]);
+                this.highlightBarByUserClicked(userClicked[0]);
             }
         )
         this.obs.observedData.subscribe(
@@ -34,7 +37,7 @@ export class BarGraphComponent implements OnInit {
                 if (d3.select('#bar-graph').empty()) {
                     console.log(d3.select('#bar-graph').empty());
                 }
-                this.graphTitle = `${dbData[0]['year']}年-各縣市平均每戶可支配所得(萬元)：`; 
+                this.graphTitle = `${dbData[0]['year']}年-各縣市平均每戶可支配所得(萬元)：`;
                 console.log();
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
                 valueOfCounty = this.simplifiedDbData(dbData);
@@ -43,7 +46,22 @@ export class BarGraphComponent implements OnInit {
         )
     }//.. ngOnInit
 
+    /**
+     * 
+     * @param cityId 
+     */
+    highlightBarByUserClicked(cityId: string): void {
 
+        let userClicked: string = this.cId.getCountyNameById(cityId);
+        //reset the color
+        d3.select(`.${this.preUserClicked}`).style('fill', 'skyblue');
+
+        //save the info of user clicked
+        this.preUserClicked = userClicked;
+
+        //set new color
+        d3.select(`.${userClicked}`).style('fill', 'blue');
+    }
     /**
      * draw bar, value, text, axis
      * @param valueOfCounty 
@@ -74,9 +92,9 @@ export class BarGraphComponent implements OnInit {
             .attr('x', (d) => gc.xScaleBand(d['name']) + gc.xScaleBand.bandwidth() / 2)
             .attr('y', (d) => gc.yScaleLinear(d['value']) - 5)
             .attr('text-anchor', 'middle')
-            .text((d) => d3.format(".1f")(d['value'] / 10000))
+            .text((d) => d3.format(".0f")(d['value'] / 10000))
             //0.9em will equal 0.9 x the parent font-size
-            .style('font-size', '1rem')
+            .style('font-size', '1.2rem')
             .style('fill', (d, i) => {
                 if (i % 2 == 0) {
                     return 'black';
@@ -102,7 +120,7 @@ export class BarGraphComponent implements OnInit {
         //make text more reabable
         textOfAaxis.attr('transform', 'rotate(45)')
             .attr('x', 20)
-            .style('font-size', '1rem');
+            .style('font-size', '1.2rem');
 
 
         // canvas.append('circle')
@@ -122,7 +140,7 @@ export class BarGraphComponent implements OnInit {
         for (let key in dbData[0]) {
             if (key != 'twall' && key != 'year' && key != '_links') {
                 newObject.push({
-                    name: this.cId.getCountyName(key),
+                    name: this.cId.getCountyNameById(key),
                     value: dbData[0][key]
                 });
             }

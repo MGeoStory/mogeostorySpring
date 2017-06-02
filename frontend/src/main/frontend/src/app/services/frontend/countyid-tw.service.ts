@@ -2,11 +2,10 @@ import * as d3 from 'd3';
 
 export class CountyIdTWService {
     private countyIdOfTW: Array<Object> = [];
+    private countyList: d3.Map<{}>;
     private test: d3.Map<{}>;
     constructor() {
-        // this.test = d3.map().set("A","臺北市").set("B","臺中市");
-
-        this.test = d3.map(
+        this.countyList = d3.map(
             {
                 A: "臺北市",
                 B: "臺中市",
@@ -38,10 +37,17 @@ export class CountyIdTWService {
     }
 
     getAllCountyId(): {} {
-        return this.test;
+        return this.countyList;
     }
 
-    getCountyName(id: string): {} {
-        return this.test.get(id.toUpperCase());
+    /**
+     * get county name by conuty id 
+     * @param id 
+     */
+    getCountyNameById(id: string): string {
+        //use String to rid {} to string type
+        return String(this.countyList.get(id.toUpperCase()));
     }
+
 }
+

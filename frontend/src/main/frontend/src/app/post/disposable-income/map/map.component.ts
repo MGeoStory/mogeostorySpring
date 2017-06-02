@@ -109,7 +109,6 @@ export class MapComponent implements OnInit {
         }, onEachFeature: (feature, layer) => {
           layer.on({
             click: (e) => {
-              console.log(feature.properties["COUNTYID"]);
               this.os.pushStringToObserved(feature.properties["COUNTYID"]);
               this.resetHighlightedFeature();
               this.highlightFeature(e);
