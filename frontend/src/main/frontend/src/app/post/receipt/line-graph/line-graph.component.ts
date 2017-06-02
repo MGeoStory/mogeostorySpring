@@ -33,7 +33,7 @@ export class LineGraphComponent implements OnInit {
             data => {
                 this.lineGraphTitle = null;
                 this.lineGraphInfo = null;
-                this.lineGraphTitle = `從地圖點選縣市可查看趨勢圖！`;
+                this.lineGraphTitle = `在地圖上點選縣市即可查看趨勢圖！`;
             }
         )
 
