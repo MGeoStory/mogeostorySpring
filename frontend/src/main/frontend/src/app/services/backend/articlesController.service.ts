@@ -7,7 +7,7 @@ import * as d3 from 'd3';
 
 @Injectable()
 export class ArticleControllerService {
-    private url = '/api';
+    private url = '/api/v1';
     constructor(private http: Http) {
     }
 
@@ -16,9 +16,9 @@ export class ArticleControllerService {
      * @return javascript's object
      */
     getArtiles(): Observable<Array<Object>> {
-        return this.http.get(this.url+"/articles?sort=id") // ...and calling .json() on the response to return a array[boject]
+        return this.http.get(this.url+"/articles/sortbyid") // ...and calling .json() on the response to return a array[boject]
             .map((res: Response) => {
-                // console.log(res.json()._embedded.articles);
+                console.log(res.json());
                 // console.log(typeof res.json()._embedded.articles);
 
                 // var articles: Array<Object> =[];
@@ -28,7 +28,7 @@ export class ArticleControllerService {
                 // });
                 // console.log(articles);
                 // console.log(res.json()._embedded.articles);
-                return res.json()._embedded.articles;
+                return res.json();
             })
             //...errors if any
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

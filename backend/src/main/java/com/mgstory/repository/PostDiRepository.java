@@ -8,7 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.List;
 import org.springframework.data.repository.query.Param;
 
-@RepositoryRestResource(collectionResourceRel = "postdi", path = "postdi")
+@RepositoryRestResource(collectionResourceRel = "postdi", path = "postdi", exported = false)
 public interface PostDiRepository extends CrudRepository<PostDi, Integer> {
 
     @RestResource(path = "year", rel = "findByYear")

@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 //https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.at-query
 //Rel is to reference the collection of database
-@RepositoryRestResource(collectionResourceRel = "countytw10", path = "countytw10")
+@RepositoryRestResource(collectionResourceRel = "countytw10", path = "countytw10", exported = false)
 public interface CountyTW10Repository extends CrudRepository<CountyTW10, Integer> {
 
     @RestResource(path = "kind", rel = "findByKind")

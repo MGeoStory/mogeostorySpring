@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.jpa.repository.Query;
-
 import java.util.Date;
 
 // // @JsonRootName(value = "articles")
@@ -19,7 +17,7 @@ import java.util.Date;
 @Table (name = "articles")
 public class Articles implements Serializable {
 
-    private static final long serialVersionUID = 100001L;
+    // private static final long serialVersionUID = 100001L;
 
     // Object-Relational Mapping => generate primary key
     @Id
