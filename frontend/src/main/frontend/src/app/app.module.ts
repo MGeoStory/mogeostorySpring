@@ -25,11 +25,13 @@ export const FrontendServices = [
 ];
 
 //backend service
-import { ArticleControllerService } from './services/backend/articlesController.service';;
-import { PostDiControllerService } from './services/backend/postdiController.service';;
+import { ArticleControllerService } from './services/backend/articlesController.service';
+import { PostDiControllerService } from './services/backend/postdiController.service';
+import { PostDisposableService } from './services/backend/post-disposable.service';
 export const BackendServices = [
   ArticleControllerService,
-  PostDiControllerService
+  PostDiControllerService,
+  PostDisposableService
 ];
 
 
