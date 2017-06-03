@@ -49,7 +49,7 @@ export class ObservableService {
 
     //data formatted
     announceRefData(refData: Array<Object>) {
-        console.log("announceRefData");
+        // console.log("announceRefData");
         this.refDataSource.next(refData);
     }
     // confirmRefData(refData: Array<Object>) {

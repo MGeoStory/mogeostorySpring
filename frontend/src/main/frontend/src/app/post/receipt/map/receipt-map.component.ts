@@ -246,12 +246,12 @@ let colorFeature: d3.ScaleLinear<any, any>;
      * if value=0 , the fill color is gray.
      */
     getFillColor(countryId: string): string {
-        console.log(countryId);
+        // console.log(countryId);
         //26 countries in Taiwan will show in map, but the data would be lack
         let valueOfCountry: number;
         if (valueOfFeatures.get(countryId) != null) {
             valueOfCountry = valueOfFeatures.get(countryId)['value'];
-            console.log(valueOfCountry);
+            // console.log(valueOfCountry);
             // console.log(valueOfCountry);
             // return rgbHex('#'+colorFeature(valueOfCountry));
             // console.log('#' + rgbHex(colorFeature(valueOfCountry)));

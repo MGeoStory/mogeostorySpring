@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 import * as d3 from 'd3';
 
+/**
+ * get data from com.mgstory.controller.ArticlesController
+ */
 @Injectable()
 export class ArticleControllerService {
     private url = '/api/v1';

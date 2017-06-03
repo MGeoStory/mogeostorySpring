@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PostDiControllerService } from 'app/services/backend/postdiController.service';
 import * as d3 from 'd3';
 import { ObservableService } from 'app/services/frontend/observable.service';
 import { PostDisposableService } from 'app/services/backend/post-disposable.service';
@@ -15,7 +14,7 @@ export class SliderBarComponent implements OnInit {
   private nouiSlider: { min: number, max: number, value: number, config: any };
   private yearExtent: number[] = [];
 
-  constructor(private pds: PostDisposableService, private pcs: PostDiControllerService, private os: ObservableService) {
+  constructor(private pds: PostDisposableService, private os: ObservableService) {
     this.nouiSlider = {
       min: 0,
       max: 0,
@@ -25,13 +24,10 @@ export class SliderBarComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.pds.getExtentYearValues().subscribe(
       (v) => {
         this.yearExtent.push(v['minYear']);
         this.yearExtent.push(v['maxYear']);
-        console.log(this.yearExtent);
-        // });
         this.setNouiSlider();
         this.loadingHTML();
         this.pushDataToObserved(this.nouiSlider.value);
@@ -51,12 +47,12 @@ export class SliderBarComponent implements OnInit {
    * push data to observed by year
    */
   pushDataToObserved(year: number) {
-    this.pcs.getPostDiByYear(year).subscribe(
+    this.pds.getPostDisposableByYear(year).subscribe(
       data => {
+        console.log(data);
         this.os.pushDataToObserved(data);
       });
   }
-
 
   /**
    * set the all values of nouiSlider
