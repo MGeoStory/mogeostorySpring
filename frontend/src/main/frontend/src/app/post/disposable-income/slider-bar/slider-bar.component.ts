@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostDiControllerService } from 'app/services/backend/postdiController.service';
 import * as d3 from 'd3';
 import { ObservableService } from 'app/services/frontend/observable.service';
-import {PostDisposableService} from 'app/services/backend/post-disposable.service';
+import { PostDisposableService } from 'app/services/backend/post-disposable.service';
 
 @Component({
   selector: 'post-disposable-income-slider-bar',
@@ -13,9 +13,9 @@ import {PostDisposableService} from 'app/services/backend/post-disposable.servic
 export class SliderBarComponent implements OnInit {
   private show: boolean = false;
   private nouiSlider: { min: number, max: number, value: number, config: any };
-  private yearExtent: number[];
+  private yearExtent: number[] = [];
 
-  constructor(private pds: PostDisposableService,private pcs: PostDiControllerService, private os: ObservableService) {
+  constructor(private pds: PostDisposableService, private pcs: PostDiControllerService, private os: ObservableService) {
     this.nouiSlider = {
       min: 0,
       max: 0,
@@ -25,14 +25,17 @@ export class SliderBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pcs.getPostDis().subscribe((di) => {
-      this.yearExtent = d3.extent(di, d => {
-        return d['year'];
+
+    this.pds.getExtentYearValues().subscribe(
+      (v) => {
+        this.yearExtent.push(v['minYear']);
+        this.yearExtent.push(v['maxYear']);
+        console.log(this.yearExtent);
+        // });
+        this.setNouiSlider();
+        this.loadingHTML();
+        this.pushDataToObserved(this.nouiSlider.value);
       });
-      this.setNouiSlider();
-      this.loadingHTML();
-      this.pushDataToObserved(this.nouiSlider.value);
-    });
   };
 
   /**

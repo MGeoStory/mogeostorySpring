@@ -15,9 +15,9 @@ export class TestAllComponent {
 
     getData() {
         console.log('clcik button');
-        this.pds.getPostDisposableByYearAndCityId(2000,'d').subscribe(
+        this.pds.getExtentYearValues().subscribe(
             data => {
-                console.log(data);
+                console.log(data["minYear"]);
                 // this.data = data;
                 this.data =JSON.stringify(data);
                 // console.log(JSON.stringify(data));

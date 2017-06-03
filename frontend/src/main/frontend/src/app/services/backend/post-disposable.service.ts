@@ -8,6 +8,14 @@ export class PostDisposableService {
     constructor(private http: Http) {
     }
 
+
+    getExtentYearValues(): Observable<Object[]> {
+        return this.http.get(`${this.baseUrl}/find/extentofyears`)
+            .map((res: Response) => {
+                return res.json();
+            });
+    }
+
     getPostDisposableByYear(year: number): Observable<Object[]> {
         return this.http.get(`${this.baseUrl}/${year}`)
             .map((res: Response) => {
