@@ -46,8 +46,8 @@ export class GraphCanvasService extends GraphFrameService {
     /**
      * set defult stacks
      */
-    setStacks(stacks:string[],stackedData:any){
-        let myStack= d3.stack().keys(stacks).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+    setStacks(stacks: string[], stackedData: any) {
+        let myStack = d3.stack().keys(stacks).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
         return myStack(stackedData);
     }
 
@@ -66,16 +66,16 @@ export class GraphCanvasService extends GraphFrameService {
     }
 
 
-    /*
-   *create grid line of linear scale
-   */
+    /** 
+    *create grid line of linear scale
+    */
     xAixsOfTimeOfGridLine(): d3.Axis<any> {
         return d3.axisBottom(this.xScaleTime).tickSize(this.getFrameHeight());
     }
 
     /**
-   *create axis of time scale
-   */
+    *create axis of time scale
+    */
     xAxisOfTime(): d3.Axis<any> {
         return d3.axisBottom(this.xScaleTime);
     }

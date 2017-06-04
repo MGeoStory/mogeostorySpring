@@ -51,8 +51,6 @@ export class BarGraphComponent implements OnInit {
      * @param stackedData 
      */
     drawStackedBar(stackedData: any) {
-        console.log(stackedData[0]);
-
         gc.yScaleLinear.domain([0, stackedData[0]["income"]]);
 
         gc.xScaleBand.domain(
@@ -64,7 +62,7 @@ export class BarGraphComponent implements OnInit {
         //set stacks
         let stacks = ["consume", "nonDisposable", "save"];
         gc.zScaleOrdinal.domain(stacks);
-        let series = gc.setStacks(stacks,stackedData);
+        let series = gc.setStacks(stacks, stackedData);
         // console.log(series);
 
         //series is  [array[],array[],arry[]];
@@ -90,7 +88,8 @@ export class BarGraphComponent implements OnInit {
                 return gc.yScaleLinear(d[1]);
             }).attr("height", (d) => {
                 return (gc.getFrameHeight() - gc.yScaleLinear(d[1] - d[0]));
-            }).attr('width', gc.xScaleBand.bandwidth());
+            }).attr('width', gc.xScaleBand.bandwidth())
+            .attr('class', (d) => (this.cId.getCountyNameById(d["data"]["cityId"])));
 
 
         //the text of domain name from gc.scaleBand.domain()
@@ -136,13 +135,13 @@ export class BarGraphComponent implements OnInit {
     highlightBarByUserClicked(cityId: string): void {
         let userClicked: string = this.cId.getCountyNameById(cityId);
         //reset the color
-        d3.select(`.${this.preUserClicked}`).style('fill', 'skyblue');
+        d3.selectAll(`.${this.preUserClicked}`).style("stroke","");
 
         //save the info of user clicked
         this.preUserClicked = userClicked;
 
         //set new color
-        d3.select(`.${userClicked}`).style('fill', 'blue');
+        d3.selectAll(`.${userClicked}`).style("stroke","blue");
     }
 
 
