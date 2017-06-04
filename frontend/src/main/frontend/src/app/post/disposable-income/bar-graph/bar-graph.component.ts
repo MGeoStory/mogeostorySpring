@@ -24,7 +24,7 @@ export class BarGraphComponent implements OnInit {
     constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
 
     ngOnInit() {
-        isFirstLoading = true;    
+        isFirstLoading = true;
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
                 this.highlightBarByUserClicked(userClicked[0]);
@@ -39,11 +39,92 @@ export class BarGraphComponent implements OnInit {
                 this.graphTitle = `${dbData[0]['year']}年--各縣市別平均每戶所得總額(萬元)：`;
                 console.log();
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
-                valueOfCounty = this.simplifiedDbData(dbData);
-                this.drawColumnGraph(valueOfCounty);
+                // valueOfCounty = this.simplifiedDbData(dbData);
+                // this.drawColumnGraph(valueOfCounty);
+                this.drawStackedBar(this.createStackedData(dbData));
             }
         )
     }//.. ngOnInit
+
+
+    drawStackedBar(stackedData) {
+        console.log(stackedData[0]);
+        let max = d3.max(stackedData, (d) => {
+            return d["income"];
+        });
+        gc.yScaleLinear.domain([0, +max]);
+
+        gc.xScaleBand.domain(
+            stackedData.map((d) => {
+                return d["cityName"];
+            })
+        );
+
+        let z = d3.scaleOrdinal(d3.schemeCategory10);
+        z.domain(["consume", "nonDisposable", "save"]);
+        let stack = d3.stack().keys(["consume", "nonDisposable", "save"]).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+        let series = stack(stackedData);
+        console.log(JSON.stringify(series));
+        console.log(series.keys());
+        // console.log(JSON.stringify(stackedData));
+
+        canvas.selectAll("g").data(series)
+            .enter().append("g")
+            .attr("fill", (d) => {
+                return z(d.key);
+            })
+            .selectAll("rect")
+            .data((d: any) => {
+                return d;
+            })
+            .enter().append("rect")
+            .attr("x", (d) => {
+                return gc.xScaleBand(d["data"]["cityName"]);
+            })
+            .attr("y", (d, i) => {
+                return gc.yScaleLinear(d[1]);
+            })
+            .attr("height",(d)=>{
+                return (gc.yScaleLinear(d[0]-gc.yScaleLinear(d[1])));
+            })
+            .attr('width', gc.xScaleBand.bandwidth())
+            ;
+
+
+        // canvas.selectAll('rect').data(stackedData).enter().append('rect')
+        //     .attr('x', (d) => gc.xScaleBand(d['cityName']))
+        //     .attr('y', (d) => gc.yScaleLinear(d['save']))
+        //     .attr('class', (d) => (d['cityName']))
+        //     .attr('width', gc.xScaleBand.bandwidth())
+        //     .attr('height', (d) => gc.getFrameHeight() - gc.yScaleLinear(d['save']))
+        //     .attr('fill', 'skyblue');
+
+
+    }
+
+
+    createStackedData(dbData: Object[]): Object[] {
+        // console.log(dbData);
+        let stackedData: Object[] = [];
+
+
+        dbData = dbData.filter((d) => {
+            return d["cityId"] != "TW"
+        })
+
+        stackedData = dbData.map((d) => {
+            return {
+                "cityName": this.cId.getCountyNameById(d["cityId"]),
+                "consume": d["consume"],
+                "save": d["save"],
+                "nonDisposable": d["nonDisposable"],
+                "income": d["income"]
+            };
+        })
+
+        return stackedData;
+    }
+
 
     /**
      * 
@@ -60,6 +141,8 @@ export class BarGraphComponent implements OnInit {
 
         //set new color
         d3.select(`.${userClicked}`).style('fill', 'blue');
+
+
     }
     /**
      * draw bar, value, text, axis
