@@ -35,6 +35,8 @@ public class PostDisposable implements Serializable {
     @Column(name = "consume")
     private Integer consume;
 
+    @Column(name="nondisposable")
+    private Integer nonDisposable;
     public Integer getYear() {
         return years;
     }
@@ -57,6 +59,10 @@ public class PostDisposable implements Serializable {
 
     public Integer getConsume() {
         return consume;
+    }
+
+        public Integer getNonDisposable() {
+        return nonDisposable;
     }
 
     public PostDisposable(){
