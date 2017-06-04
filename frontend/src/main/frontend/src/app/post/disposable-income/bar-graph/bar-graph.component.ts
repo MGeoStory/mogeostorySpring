@@ -61,16 +61,16 @@ export class BarGraphComponent implements OnInit {
         );
 
         let z = d3.scaleOrdinal(d3.schemeCategory10);
-        z.domain(["consume", "nonDisposable", "save"]);
-        let stack = d3.stack().keys(["consume", "nonDisposable", "save"]).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
-        let series = stack(stackedData);
-        console.log(JSON.stringify(series));
-        console.log(series.keys());
-        // console.log(JSON.stringify(stackedData));
+        let stacks = ["consume", "nonDisposable", "save"];
+        z.domain(stacks);
+        let myStack = d3.stack().keys(stacks).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+        let series = myStack(stackedData);
+        // console.log(JSON.stringify(series));
 
         canvas.selectAll("g").data(series)
             .enter().append("g")
             .attr("fill", (d) => {
+                console.log(d.key+":"+z(d.key));
                 return z(d.key);
             })
             .selectAll("rect")
@@ -81,11 +81,11 @@ export class BarGraphComponent implements OnInit {
             .attr("x", (d) => {
                 return gc.xScaleBand(d["data"]["cityName"]);
             })
-            .attr("y", (d, i) => {
+            .attr("y", (d, i) =>{
                 return gc.yScaleLinear(d[1]);
             })
             .attr("height",(d)=>{
-                return (gc.yScaleLinear(d[0]-gc.yScaleLinear(d[1])));
+                return (gc.getFrameHeight()-gc.yScaleLinear(d[1]-d[0]));
             })
             .attr('width', gc.xScaleBand.bandwidth())
             ;
