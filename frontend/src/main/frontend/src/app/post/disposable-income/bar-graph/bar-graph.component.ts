@@ -37,101 +37,103 @@ export class BarGraphComponent implements OnInit {
                     console.log(d3.select('#bar-graph').empty());
                 }
                 this.graphTitle = `${dbData[0]['year']}年--各縣市別平均每戶所得總額(萬元)：`;
-                console.log();
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
                 // valueOfCounty = this.simplifiedDbData(dbData);
                 // this.drawColumnGraph(valueOfCounty);
+                // this.drawStackedBar(this.createStackedData(dbData));
                 this.drawStackedBar(this.createStackedData(dbData));
             }
         )
     }//.. ngOnInit
 
-
-    drawStackedBar(stackedData) {
+    /**
+     * the type of stackedData must be any (type error)
+     * @param stackedData 
+     */
+    drawStackedBar(stackedData: any) {
         console.log(stackedData[0]);
-        let max = d3.max(stackedData, (d) => {
-            return d["income"];
-        });
-        gc.yScaleLinear.domain([0, +max]);
+
+        gc.yScaleLinear.domain([0, stackedData[0]["income"]]);
 
         gc.xScaleBand.domain(
             stackedData.map((d) => {
-                return d["cityName"];
+                return this.cId.getCountyNameById(d["cityId"]);
             })
         );
 
-        let z = d3.scaleOrdinal(d3.schemeCategory10);
+        //set stacks
         let stacks = ["consume", "nonDisposable", "save"];
-        z.domain(stacks);
-        let myStack = d3.stack().keys(stacks).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
-        let series = myStack(stackedData);
-        // console.log(JSON.stringify(series));
+        gc.zScaleOrdinal.domain(stacks);
+        let series = gc.setStacks(stacks,stackedData);
+        // console.log(series);
 
+        //series is  [array[],array[],arry[]];
         canvas.selectAll("g").data(series)
             .enter().append("g")
-            .attr("fill", (d) => {
-                console.log(d.key+":"+z(d.key));
-                return z(d.key);
+            //useing any to avoid type error
+            .attr("fill", (d, i): any => {
+                // console.log(d[i]);
+                // console.log(d.key + ":" + z(d.key));
+                return gc.zScaleOrdinal(d.key);
             })
-            .selectAll("rect")
-            .data((d: any) => {
+            //useing any to avoid type error
+            //the 1st. 2nd and 3rd array[] in series
+            .selectAll("rect").data((d: any) => {
+                //d = series[i]
                 return d;
             })
             .enter().append("rect")
             .attr("x", (d) => {
-                return gc.xScaleBand(d["data"]["cityName"]);
-            })
-            .attr("y", (d, i) =>{
+                return gc.xScaleBand(this.cId.getCountyNameById(d["data"]["cityId"]));
+            }).attr("y", (d, i) => {
+                //0:start value, 1:end value, 2:data
                 return gc.yScaleLinear(d[1]);
-            })
-            .attr("height",(d)=>{
-                return (gc.getFrameHeight()-gc.yScaleLinear(d[1]-d[0]));
-            })
-            .attr('width', gc.xScaleBand.bandwidth())
-            ;
+            }).attr("height", (d) => {
+                return (gc.getFrameHeight() - gc.yScaleLinear(d[1] - d[0]));
+            }).attr('width', gc.xScaleBand.bandwidth());
 
 
-        // canvas.selectAll('rect').data(stackedData).enter().append('rect')
-        //     .attr('x', (d) => gc.xScaleBand(d['cityName']))
-        //     .attr('y', (d) => gc.yScaleLinear(d['save']))
-        //     .attr('class', (d) => (d['cityName']))
-        //     .attr('width', gc.xScaleBand.bandwidth())
-        //     .attr('height', (d) => gc.getFrameHeight() - gc.yScaleLinear(d['save']))
-        //     .attr('fill', 'skyblue');
+        //the text of domain name from gc.scaleBand.domain()
+        let textOfAaxis = canvas.append('g')
+            .attr('class', 'xAxis')
+            .attr('transform', `translate(0,${gc.getFrameHeight()})`)
+            .call(gc.xAxisOfBand())
+            .selectAll('text')
+            .style('fill', (d, i) => {
+                if (i % 2 == 0) {
+                    return 'black';
+                } else {
+                    return 'DimGrey';
+                }
+            });
 
-
+        //make text more reabable
+        textOfAaxis.attr('transform', 'rotate(45)')
+            .attr('x', 20)
+            .style('font-size', '1.2rem');
     }
 
-
+    /**
+     * filter ans sort data from database
+     * @param dbData 
+     */
     createStackedData(dbData: Object[]): Object[] {
-        // console.log(dbData);
         let stackedData: Object[] = [];
-
-
-        dbData = dbData.filter((d) => {
+        stackedData = dbData.filter((d) => {
             return d["cityId"] != "TW"
         })
-
-        stackedData = dbData.map((d) => {
-            return {
-                "cityName": this.cId.getCountyNameById(d["cityId"]),
-                "consume": d["consume"],
-                "save": d["save"],
-                "nonDisposable": d["nonDisposable"],
-                "income": d["income"]
-            };
+        stackedData.sort((x, y) => {
+            return d3.descending(x["income"], y["income"]);
         })
-
+        console.log(stackedData);
         return stackedData;
     }
-
 
     /**
      * 
      * @param cityId 
      */
     highlightBarByUserClicked(cityId: string): void {
-
         let userClicked: string = this.cId.getCountyNameById(cityId);
         //reset the color
         d3.select(`.${this.preUserClicked}`).style('fill', 'skyblue');
@@ -141,9 +143,10 @@ export class BarGraphComponent implements OnInit {
 
         //set new color
         d3.select(`.${userClicked}`).style('fill', 'blue');
-
-
     }
+
+
+    // it useful in draw column graph==========================================================================
     /**
      * draw bar, value, text, axis
      * @param valueOfCounty 
@@ -203,14 +206,6 @@ export class BarGraphComponent implements OnInit {
         textOfAaxis.attr('transform', 'rotate(45)')
             .attr('x', 20)
             .style('font-size', '1.2rem');
-
-
-        // canvas.append('circle')
-        //     .attr('class', 'info')
-        //     .attr('cx', gc.getFrameWidth()*0.9)
-        //     .attr('cy', 0)
-        //     .attr('r', 20);
-
     }//.. drawColumnGraph
 
     /**

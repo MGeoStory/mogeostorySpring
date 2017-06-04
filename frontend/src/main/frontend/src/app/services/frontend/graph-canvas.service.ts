@@ -9,6 +9,7 @@ export class GraphCanvasService extends GraphFrameService {
     xScaleBand: d3.ScaleBand<string>;
     xScaleTime: d3.ScaleTime<number, number>;
     yScaleLinear: d3.ScaleLinear<number, number>;
+    zScaleOrdinal: d3.ScaleOrdinal<String, {}>;
     //http://bl.ocks.org/zanarmstrong/05c1e95bf7aa16c4768e
     rounded = d3.format(',.0f');
     line;
@@ -17,10 +18,14 @@ export class GraphCanvasService extends GraphFrameService {
     constructor() {
         super();
         this.xScaleBand = d3.scaleBand().range([0, this.getFrameWidth()]).paddingInner(0.1);
-        this.yScaleLinear = d3.scaleLinear().range([this.getFrameHeight(), 0]);
         this.xScaleTime = d3.scaleTime().range([0, this.getFrameWidth()]);
 
+        this.yScaleLinear = d3.scaleLinear().range([this.getFrameHeight(), 0]);
 
+        //colors that select from d3.shemeCategory20b
+        this.zScaleOrdinal = d3.scaleOrdinal().range(["#6baed6", "#fd8d3c", "#74c476", "#9e9ac8", "#969696"]);
+        // .range(["#c6dbef ", "#fdd0a2","#c7e9c0", "#dadaeb", "#d9d9d9"]);
+        // .range(["#9ecae1", "#fdae6b","#a1d99b", "#bcbddc", "#bdbdbd"]);
 
         // this.yGridLine= d3.axisRight(this.y)
 
@@ -37,6 +42,14 @@ export class GraphCanvasService extends GraphFrameService {
 
         // this.xAxisOfColumn = this.xAxisOfColumn();
     };
+
+    /**
+     * set defult stacks
+     */
+    setStacks(stacks:string[],stackedData:any){
+        let myStack= d3.stack().keys(stacks).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+        return myStack(stackedData);
+    }
 
     /*
     *create grid line of linear scale
