@@ -49,7 +49,7 @@ export class SliderBarComponent implements OnInit {
   pushDataToObserved(year: number) {
     this.pds.getPostDisposableByYear(year).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.os.pushDataToObserved(data);
       });
   }

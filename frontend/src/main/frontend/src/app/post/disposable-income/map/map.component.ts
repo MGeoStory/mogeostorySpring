@@ -57,12 +57,9 @@ export class MapComponent implements OnInit {
    */
   simplifiedDbData(dbData: Object[]) {
     let vof: d3.Map<{}> = d3.map();
-    for (let key in dbData[0]) {
-      if (key != 'twall' && key != 'year' && key != '_links') {
-        // console.log(key);
-        // console.log(dbData[0][key]);
-        vof.set(key.toUpperCase(), dbData[0][key]);
-      }
+
+    for(let index in dbData){
+      vof.set(dbData[index]['cityId'],dbData[index]['income']);
     }
     return vof;
   }

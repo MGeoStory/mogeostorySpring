@@ -24,8 +24,7 @@ export class BarGraphComponent implements OnInit {
     constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
 
     ngOnInit() {
-        isFirstLoading = true;
-
+        isFirstLoading = true;    
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
                 this.highlightBarByUserClicked(userClicked[0]);
@@ -37,7 +36,7 @@ export class BarGraphComponent implements OnInit {
                 if (d3.select('#bar-graph').empty()) {
                     console.log(d3.select('#bar-graph').empty());
                 }
-                this.graphTitle = `${dbData[0]['year']}年-各縣市平均每戶可支配所得(萬元)：`;
+                this.graphTitle = `${dbData[0]['year']}年--各縣市別平均每戶所得總額(萬元)：`;
                 console.log();
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
                 valueOfCounty = this.simplifiedDbData(dbData);
@@ -136,15 +135,21 @@ export class BarGraphComponent implements OnInit {
      * @param dbData 
      */
     simplifiedDbData(dbData: Object[]) {
+        console.log(dbData);
         let newObject: Object[] = [];
-        for (let key in dbData[0]) {
-            if (key != 'twall' && key != 'year' && key != '_links') {
-                newObject.push({
-                    name: this.cId.getCountyNameById(key),
-                    value: dbData[0][key]
-                });
-            }
+
+        dbData = dbData.filter((d) => {
+            return d['cityId'] != "TW";
+        });
+
+        console.log(dbData);
+        for (let index in dbData) {
+            newObject.push({
+                name: this.cId.getCountyNameById(dbData[index]["cityId"]),
+                value: dbData[index]["income"],
+            });
         }
+
         newObject.sort((x, y) => {
             return d3.descending(x['value'], y['value']);
         })
