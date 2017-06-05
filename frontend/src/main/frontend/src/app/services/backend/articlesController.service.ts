@@ -19,7 +19,6 @@ export class ArticleControllerService {
     getArtiles(): Observable<Array<Object>> {
         return this.http.get(this.url+"/articles/sortbyid") // ...and calling .json() on the response to return a array[boject]
             .map((res: Response) => {
-                console.log(res.json());
                 // console.log(typeof res.json()._embedded.articles);
 
                 // var articles: Array<Object> =[];

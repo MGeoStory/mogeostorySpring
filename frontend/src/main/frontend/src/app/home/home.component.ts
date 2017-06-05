@@ -11,10 +11,8 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("aaa");
         this.acs.getArtiles().subscribe(
             (articles: Array<Object>) => {
-                console.log("hihi");
                 // this.articles = articles;
                 articles.forEach((d) => {
                     // console.log(d["title"]);

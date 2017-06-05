@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservableService } from 'app/services/frontend/observable.service';
-import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
 import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import * as d3 from 'd3';
 import { CountyIdTWService } from 'app/services/frontend/countyid-tw.service';
@@ -32,16 +31,13 @@ export class BarGraphComponent implements OnInit {
                 this.highlightBarByUserClicked(userClicked[0]);
                 console.log(this.yearSelected);
                 this.obs.pushAnyToObserved([userClicked[0], this.yearSelected]);
+
             }
         )
         this.obs.observedData.subscribe(
             (dbData: Object[]) => {
-
                 this.yearSelected = dbData[0]["year"];
-                //remove the old graph
-                if (d3.select('#bar-graph').empty()) {
-                    console.log(d3.select('#bar-graph').empty());
-                }
+
                 this.graphTitle = `${dbData[0]['year']}年--各縣市別平均每戶所得總額(萬元)：`;
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
                 // valueOfCounty = this.simplifiedDbData(dbData);
@@ -130,7 +126,7 @@ export class BarGraphComponent implements OnInit {
         stackedData.sort((x, y) => {
             return d3.descending(x["income"], y["income"]);
         })
-        console.log(stackedData);
+        // console.log(stackedData);
         return stackedData;
     }
 

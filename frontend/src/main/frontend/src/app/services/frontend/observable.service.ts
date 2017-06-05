@@ -12,20 +12,35 @@ export class ObservableService {
     observedString = this.subjectString.asObservable();
     observedNumber = this.subjectNumber.asObservable();
     observedData = this.subjectData.asObservable();
-    observedAny = this.subjectData.asObservable();
+    observedAny = this.subjectAny.asObservable();
 
+    /**
+     * push Object
+     * @param data
+     */
     pushDataToObserved(data: Object[]) {
         this.subjectData.next(data);
     };
-
+    /**
+     * push string
+     * @param data 
+     */
     pushStringToObserved(data: String[]) {
         this.subjectString.next(data);
     }
 
+    /**
+     * push number
+     * @param data 
+     */
     pushNumberToObserved(data: Number[]) {
         this.subjectNumber.next(data);
     }
 
+    /**
+     * push any you want
+     * @param data 
+     */
     pushAnyToObserved(data: any[]) {
         this.subjectAny.next(data);
     }

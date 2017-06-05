@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-
 /**
  * get data from com.mgstory.controller.PostDisposableController
  */
@@ -23,7 +22,6 @@ export class PostDisposableService {
     getPostDisposableByYearAndCityId(year: number, cityId: string): Observable<Object[]> {
         return this.http.get(`${this.baseUrl}/${year}/city/${cityId}`)
             .map((res: Response) => {
-                console.log(res.json());
                 return res.json();
             })
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
