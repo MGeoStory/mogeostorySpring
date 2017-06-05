@@ -7,10 +7,12 @@ export class ObservableService {
     private subjectString = new Subject<String[]>();
     private subjectNumber = new Subject<Number[]>();
     private subjectData = new Subject<Object[]>();
+    private subjectAny = new Subject<any[]>();
 
     observedString = this.subjectString.asObservable();
     observedNumber = this.subjectNumber.asObservable();
     observedData = this.subjectData.asObservable();
+    observedAny = this.subjectData.asObservable();
 
     pushDataToObserved(data: Object[]) {
         this.subjectData.next(data);
@@ -22,6 +24,10 @@ export class ObservableService {
 
     pushNumberToObserved(data: Number[]) {
         this.subjectNumber.next(data);
+    }
+
+    pushAnyToObserved(data: any[]) {
+        this.subjectAny.next(data);
     }
 
     //////////////////////////////////

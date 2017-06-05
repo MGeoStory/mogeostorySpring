@@ -75,11 +75,13 @@ import { DisposableIncomeComponent } from './post/disposable-income/disposable-i
 import { SliderBarComponent } from './post/disposable-income/slider-bar/slider-bar.component';
 import { MapComponent } from './post/disposable-income/map/map.component';
 import { BarGraphComponent } from './post/disposable-income/bar-graph/bar-graph.component';
+import { TableComponent } from './post/disposable-income/table/table.component';
 export const DisposableIncomeComponents = [
   DisposableIncomeComponent,
   SliderBarComponent,
   MapComponent,
-  BarGraphComponent
+  BarGraphComponent,
+  TableComponent
 ];
 
 

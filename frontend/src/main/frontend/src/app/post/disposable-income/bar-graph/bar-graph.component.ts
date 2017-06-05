@@ -21,6 +21,8 @@ export class BarGraphComponent implements OnInit {
 
     private graphTitle: string = "worked";
     private preUserClicked: string;
+    private yearSelected: number; //used to query data for talbe
+
     constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
 
     ngOnInit() {
@@ -28,10 +30,14 @@ export class BarGraphComponent implements OnInit {
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
                 this.highlightBarByUserClicked(userClicked[0]);
+                console.log(this.yearSelected);
+                this.obs.pushAnyToObserved([userClicked[0], this.yearSelected]);
             }
         )
         this.obs.observedData.subscribe(
             (dbData: Object[]) => {
+
+                this.yearSelected = dbData[0]["year"];
                 //remove the old graph
                 if (d3.select('#bar-graph').empty()) {
                     console.log(d3.select('#bar-graph').empty());
@@ -135,13 +141,13 @@ export class BarGraphComponent implements OnInit {
     highlightBarByUserClicked(cityId: string): void {
         let userClicked: string = this.cId.getCountyNameById(cityId);
         //reset the color
-        d3.selectAll(`.${this.preUserClicked}`).style("stroke","");
+        d3.selectAll(`.${this.preUserClicked}`).style("stroke", "");
 
         //save the info of user clicked
         this.preUserClicked = userClicked;
 
         //set new color
-        d3.selectAll(`.${userClicked}`).style("stroke","blue");
+        d3.selectAll(`.${userClicked}`).style("stroke", "blue");
     }
 
 
