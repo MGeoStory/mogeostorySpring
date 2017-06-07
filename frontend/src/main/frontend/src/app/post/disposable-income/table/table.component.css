@@ -19,6 +19,30 @@ td {
     border:1px solid steelblue;
 }
 
+.headerT, .disposableT, .totalT {
+    background-color:GhostWhite;
+    font-weight: bold;
+}
+
+.nonDisposableT{
+    font-weight: bold;
+    background-color:#fd8d3c;
+}
+
+.consumeT{
+    background-color:#6baed6;
+}
+
+.saveT{
+    background-color:#74c476;
+}
+
+.TotalTS{
+    color: red;
+}
+
+
+
 /* 超小螢幕設備（手機，小於 768px） */
 /* 沒有媒體查詢，因為這在 Bootstrap 3 是預設的。 */
 /* 小螢幕設備（平板，768px（含）以上） */

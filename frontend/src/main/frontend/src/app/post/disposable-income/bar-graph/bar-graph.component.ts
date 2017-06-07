@@ -3,7 +3,7 @@ import { ObservableService } from 'app/services/frontend/observable.service';
 import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import * as d3 from 'd3';
 import { CountyIdTWService } from 'app/services/frontend/countyid-tw.service';
-
+import { PostDisposableService } from 'app/services/backend/post-disposable.service';
 let gc = new GraphCanvasService();
 let canvas: d3.Selection<any, any, any, any>;
 let valueOfCounty: Object[] = [];
@@ -18,35 +18,89 @@ let isFirstLoading: boolean = true;
 
 export class BarGraphComponent implements OnInit {
 
-    private graphTitle: string = "worked";
+    private graphTitle: string = "ERROR:No Data";
+    private subTitle: string = "ERROR: No Data";
     private preUserClicked: string;
     private yearSelected: number; //used to query data for talbe
+    private showSubTitleIs: boolean = false;
 
-    constructor(private obs: ObservableService, private cId: CountyIdTWService) { }
+    constructor(private obs: ObservableService, private cId: CountyIdTWService, private pds: PostDisposableService) { }
 
     ngOnInit() {
         isFirstLoading = true;
+
+        //user click map 
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
                 this.highlightBarByUserClicked(userClicked[0]);
                 console.log(this.yearSelected);
+                //push id and year
                 this.obs.pushAnyToObserved([userClicked[0], this.yearSelected]);
-
             }
         )
+
+        //user click map
+        this.obs.observedAny.subscribe(
+            (data) => {
+                //get data from backend
+                this.pds.getPostDisposableByYearAndCityId(data[1], data[0]).subscribe(
+                    (data) => {
+                        // this.setSubTitle(data);
+
+                    })
+            }
+        );
+
+        //user slide bar
         this.obs.observedData.subscribe(
             (dbData: Object[]) => {
                 this.yearSelected = dbData[0]["year"];
 
-                this.graphTitle = `${dbData[0]['year']}年--各縣市別平均每戶所得總額(萬元)：`;
+                this.graphTitle = `${dbData[0]['year']}年-各縣市每戶所得(萬元)：`;
                 canvas = gc.createCanvas('bar-canvas', '#bar-graph');
                 // valueOfCounty = this.simplifiedDbData(dbData);
                 // this.drawColumnGraph(valueOfCounty);
                 // this.drawStackedBar(this.createStackedData(dbData));
+                this.showSubTitleIs = false;
                 this.drawStackedBar(this.createStackedData(dbData));
             }
         )
     }//.. ngOnInit
+
+    /**
+     * set values of subtitle
+     * @param data 
+     */
+    setSubTitle(data) {
+        let cityName = this.cId.getCountyNameById(data[0]["cityId"]);
+        let year = data[0]["year"];
+        // this.graphTitle = `${year}年-${cityName}每戶調查資料：`
+        console.log(data);
+
+        let tenK = d3.format(".1f");
+        let percent = d3.format(".1%");
+        let consume: number = data[0]["consume"];
+        let save: number = data[0]["save"];
+        let nonDisposable: number = data[0]["nonDisposable"];
+        let total: number = consume + save + nonDisposable;
+
+        let consumeS: string = tenK(consume / 10000);
+        let saveS: string = tenK(save / 10000);
+        let nonDisposableS: string = tenK(nonDisposable / 10000);
+        let totalS:string = tenK(total/10000);
+
+        let consumeP: string = percent(consume / total);
+        let saveP: string = percent(save / total);
+        let nonDisposableP: string = percent(nonDisposable / total);
+        console.log(saveP);
+
+        this.subTitle = `${year}年${cityName}所得總額(${totalS}萬): 
+                            消費支出:${consumeS}萬(${consumeP});
+                            非消費性支出:${nonDisposableS}萬(${nonDisposableP});
+                            儲蓄:${saveS}萬(${saveP})`;
+
+        this.showSubTitleIs = true;
+    }
 
     /**
      * the type of stackedData must be any (type error)
@@ -112,6 +166,44 @@ export class BarGraphComponent implements OnInit {
         textOfAaxis.attr('transform', 'rotate(45)')
             .attr('x', 20)
             .style('font-size', '1.2rem');
+
+        let legend = gc.canvas.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "1rem")
+            .attr("text-anchor", "end")
+            .selectAll("g")
+            .data(stacks.reverse())
+            .enter()
+            .append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+
+        legend.append("text")
+            .attr("x", gc.getFrameWidth() - 24)
+            .attr("y", 9.5)
+            .attr("font-size", "1.5rem")
+            .attr("dy", "0.32em")
+            .text((d) => {
+                switch (d) {
+                    case "consume":
+                        return "消費支出";
+                    case "nonDisposable":
+                        return "非消費性支出";
+                    case "save":
+                        return "儲蓄";
+                }
+                return d
+            });
+
+        legend.append("rect")
+            .attr("x", gc.getFrameWidth() - 19)
+            .attr("width", 19)
+            .attr("height", 19)
+            .attr("fill", (d): any => {
+                // console.log(gc.zScaleOrdinal(d));
+                return gc.zScaleOrdinal(d);
+            });
+
     }
 
     /**
@@ -207,6 +299,9 @@ export class BarGraphComponent implements OnInit {
         textOfAaxis.attr('transform', 'rotate(45)')
             .attr('x', 20)
             .style('font-size', '1.2rem');
+
+
+
     }//.. drawColumnGraph
 
     /**

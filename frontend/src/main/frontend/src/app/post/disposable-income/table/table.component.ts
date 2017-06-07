@@ -56,7 +56,7 @@ export class TableComponent implements OnInit {
         //if year of use seleced is changed, then dont show the tables
         this.os.observedNumber.subscribe(
             (data) => {
-                this.graphTitle = `在地圖上點選縣市即可查看各縣市調查資料！`;
+                this.graphTitle = `在地圖上點選縣市即可檢視各縣市家戶所得分配情形！`;
                 this.showTableIs = false;
             }
         )

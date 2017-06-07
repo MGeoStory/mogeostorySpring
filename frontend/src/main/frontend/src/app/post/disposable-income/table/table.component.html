@@ -5,30 +5,31 @@
     <div>
         <table border="1" style="width:100%">
             <tbody>
-                <tr>
-                    <td colspan="2">分類</td>
+                <tr class="headerT">
+                    <td colspan="2">家戶所得流向類別</td>
                     <td>金額(元)</td>
                     <td>百分比(%)</td>
                 </tr>
-                <td colspan="2">無法自由支配之非消費性支出</td>
-                <td>{{nonDisposableC}}</td>
-                <td>{{nonDisposableP}}</td>
-                <tr>
-                </tr>
-                <td rowspan="2">可支配所得</td>
-                <td>消費支出</td>
-                <td>{{consumeC}}</td>
-                <td>{{consumeP}}</td>
-                <tr>
-                    <td>儲蓄</td>
-                    <td>{{saveC}}</td>
-                    <td>{{saveP}}</td>
+                <tr class="nonDisposableT">
+                    <td colspan="2">無法自由支配之非消費性支出</td>
+                    <td>{{nonDisposableC}}</td>
+                    <td>{{nonDisposableP}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">所得總額</td>
-                    <td>{{incomeC}}</td>
-                    <td>{{incomeP}}</td>
-                </tr>
+                    <td rowspan="2" class="disposableT">可支配所得</td>
+                    <td class="consumeT">消費支出</td>
+                    <td class="consumeT">{{consumeC}}</td>
+                    <td class="consumeT">{{consumeP}}</td>
+                    <tr>
+                        <td class="saveT">儲蓄</td>
+                        <td class="saveT">{{saveC}}</td>
+                        <td class="saveT">{{saveP}}</td>
+                    </tr>
+                    <tr >
+                        <td colspan="2" class="totalT">所得總額</td>
+                        <td class="TotalTS">{{incomeC}}</td>
+                        <td>{{incomeP}}</td>
+                    </tr>
             </tbody>
         </table>
     </div>

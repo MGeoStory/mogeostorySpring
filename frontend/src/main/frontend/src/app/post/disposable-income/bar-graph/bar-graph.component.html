@@ -1,6 +1,10 @@
 <div>
     <div>
+        <br>
         <h4 class="graphTitle"><strong>{{graphTitle}}</strong></h4>
+    </div>
+    <div *ngIf="showSubTitleIs">
+        <h5 class="subTitle">{{subTitle}}</h5>
     </div>
 </div>
 <div id='bar-graph'>
