@@ -1,8 +1,8 @@
+<div>
+    <h4 class="graphTitle"><strong>{{graphTitle}}</strong></h4>
+</div>
 <div *ngIf="showTableIs">
-    <div >
-        <h4 class="graphTitle"><strong>{{graphTitle}}</strong></h4>
-    </div>
-    <div >
+    <div>
         <table border="1" style="width:100%">
             <tbody>
                 <tr>
@@ -10,7 +10,7 @@
                     <td>金額(元)</td>
                     <td>百分比(%)</td>
                 </tr>
-                <td colspan="2">無法支配所得*</td>
+                <td colspan="2">無法自由支配之非消費性支出</td>
                 <td>{{nonDisposableC}}</td>
                 <td>{{nonDisposableP}}</td>
                 <tr>
@@ -25,11 +25,14 @@
                     <td>{{saveP}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">每戶所得總額</td>
+                    <td colspan="2">所得總額</td>
                     <td>{{incomeC}}</td>
                     <td>{{incomeP}}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div>
+        註：所得總額減去無法自由支配使用之非消費支出 (如賦稅支出、利息支出、捐贈及其他移轉支出) 後，即為家庭可支配所得，可由家庭自由支配使用於消費或儲蓄。(<a href="http://w2.dbas.taipei.gov.tw/news_weekly/Dic_N.asp?DS_No=1319">臺北市重要統計指標名詞定義</a>)
     </div>
 </div>

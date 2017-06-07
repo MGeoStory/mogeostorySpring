@@ -14,7 +14,7 @@ import * as d3 from 'd3';
 export class TableComponent implements OnInit {
     private canvas: d3.Selection<any, any, any, any>;
     private gc = new GraphCanvasService();
-    private graphTitle: string;
+    private graphTitle: string =`在地圖上點選縣市即可查看各縣市調查資料！`;
 
     //income = disposable + nonDisposable
     //disposable = consume + save
@@ -56,8 +56,8 @@ export class TableComponent implements OnInit {
         //if year of use seleced is changed, then dont show the tables
         this.os.observedNumber.subscribe(
             (data) => {
-                this.showTableIs = false;
                 this.graphTitle = `在地圖上點選縣市即可查看各縣市調查資料！`;
+                this.showTableIs = false;
             }
         )
     }
