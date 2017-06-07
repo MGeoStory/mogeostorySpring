@@ -8,7 +8,7 @@ const MAP_ID: string = 'lmap';
 const GEOJSON_DATA: string = 'assets/geodata/county_tw-ms.json';
 let map: L.Map;
 let layersOfCounty: L.GeoJSON;
-let isFirstLoading: boolean = true;
+// let isFirstLoading: boolean = true;
 let colorizeFeatures: d3.ScaleLinear<any, any>;
 let valueOfFeatures: d3.Map<{}> = d3.map();
 let featuresUserClicked: L.FeatureGroup;
@@ -21,6 +21,8 @@ let featuresUserClicked: L.FeatureGroup;
 })
 
 export class MapComponent implements OnInit {
+  private isFirstLoading :boolean = true;
+
   constructor(private lms: LMapSettingService, private os: ObservableService) {
   }
 
@@ -33,9 +35,9 @@ export class MapComponent implements OnInit {
         valueOfFeatures = this.simplifiedDbData(dbData);
         // console.log(valueOfFeatures);
         colorizeFeatures = this.linearColorize(valueOfFeatures);
-        if (isFirstLoading) {
+        if (this.isFirstLoading) {
           this.mappingTaiwanByCounty(valueOfFeatures);
-          isFirstLoading = false;
+          this.isFirstLoading = false;
         } else {
           this.resetLayersStyle(valueOfFeatures);
           this.resetHighlightedFeature();
@@ -92,7 +94,6 @@ export class MapComponent implements OnInit {
    * mapping Taiwan By county only once that user entre page in first time.
    */
   mappingTaiwanByCounty(valueOfFeatures: d3.Map<{}>): void {
-    // console.log("mappingTaiwanByCounty");
     d3.json(GEOJSON_DATA, (geoData) => {
       layersOfCounty = L.geoJSON(geoData, {
         style: (feature) => {

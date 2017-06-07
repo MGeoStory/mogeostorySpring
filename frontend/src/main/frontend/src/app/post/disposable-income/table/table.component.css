@@ -38,6 +38,7 @@ td {
 }
 
 .TotalTS{
+    font-weight: bold;
     color: red;
 }
 

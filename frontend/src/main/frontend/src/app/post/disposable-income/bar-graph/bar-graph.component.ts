@@ -33,7 +33,6 @@ export class BarGraphComponent implements OnInit {
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {
                 this.highlightBarByUserClicked(userClicked[0]);
-                console.log(this.yearSelected);
                 //push id and year
                 this.obs.pushAnyToObserved([userClicked[0], this.yearSelected]);
             }
@@ -45,8 +44,7 @@ export class BarGraphComponent implements OnInit {
                 //get data from backend
                 this.pds.getPostDisposableByYearAndCityId(data[1], data[0]).subscribe(
                     (data) => {
-                        // this.setSubTitle(data);
-
+                        this.setSubTitle(data);
                     })
             }
         );
@@ -75,7 +73,6 @@ export class BarGraphComponent implements OnInit {
         let cityName = this.cId.getCountyNameById(data[0]["cityId"]);
         let year = data[0]["year"];
         // this.graphTitle = `${year}年-${cityName}每戶調查資料：`
-        console.log(data);
 
         let tenK = d3.format(".1f");
         let percent = d3.format(".1%");
@@ -92,7 +89,6 @@ export class BarGraphComponent implements OnInit {
         let consumeP: string = percent(consume / total);
         let saveP: string = percent(save / total);
         let nonDisposableP: string = percent(nonDisposable / total);
-        console.log(saveP);
 
         this.subTitle = `${year}年${cityName}所得總額(${totalS}萬): 
                             消費支出:${consumeS}萬(${consumeP});
@@ -309,14 +305,14 @@ export class BarGraphComponent implements OnInit {
      * @param dbData 
      */
     simplifiedDbData(dbData: Object[]) {
-        console.log(dbData);
+        // console.log(dbData);
         let newObject: Object[] = [];
 
         dbData = dbData.filter((d) => {
             return d['cityId'] != "TW";
         });
 
-        console.log(dbData);
+        // console.log(dbData);
         for (let index in dbData) {
             newObject.push({
                 name: this.cId.getCountyNameById(dbData[index]["cityId"]),
