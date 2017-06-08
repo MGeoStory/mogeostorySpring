@@ -6,7 +6,7 @@
                     <div class="thumbnail">
                          <a routerLink="{{article.routeLink}}"><p class="atitle"> {{article.title}} </p></a>
                         <p class="ainfo">
-                            posted on {{article.postDate | date}} | Author: <a href="{{article.title}}">{{article.author}}</a>
+                            日期： {{article.postDate | date:"yyyy/MM/dd"}} | 作者: <a href="{{article.title}}">{{article.author}}</a>
                         </p>
                         <p class="asummary"> {{article.summary}}</p>
                         <a routerLink="{{article.routeLink}}"><img class="img-responsive" src={{article.imageLink}} alt="server error"></a>

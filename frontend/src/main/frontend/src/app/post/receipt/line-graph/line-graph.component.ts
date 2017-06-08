@@ -43,7 +43,7 @@ export class LineGraphComponent implements OnInit {
                 gc.setFrameMargin(-1, 5, -1, 30);
                 canvas = gc.createCanvas('line-canvas', '#line-graph');
                 this.drawLineGraph(id);
-                this.lineGraphTitle = `${id}逐月平均消費金額（便利商店）:`;
+                this.lineGraphTitle = `${id}逐月平均消費金額:`;
                 //scoll to line-graph
                 // const element = document.querySelector('#test');
                 // if (element) { element.scrollIntoView(element); }

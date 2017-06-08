@@ -14,7 +14,7 @@ let canvas: d3.Selection<any, any, any, any>;
     styleUrls: ['bar-graph.component.css'],
 })
 export class BarGraph implements OnInit {
-    private graphTitle: string = "2013年1月-各縣市平均消費金額(便利商店)：";
+    private graphTitle: string = "2013年1月-各縣市平均消費金額：";
 
     constructor(private mgs: ObservableService) {
     }//END OF constructor
@@ -23,7 +23,7 @@ export class BarGraph implements OnInit {
         this.mgs.refTime.subscribe(
             time => {
                 // this.graphTitle = `各縣市平均消費金額(${time[0]}/${time[1]}):`;
-                this.graphTitle = `${time[0]}年${time[1]}月-各縣市平均消費金額(便利商店)：`
+                this.graphTitle = `${time[0]}年${time[1]}月-各縣市平均消費金額：`
             }
         )
 
@@ -69,6 +69,10 @@ export class BarGraph implements OnInit {
         let maxOfData = d3.max(data, (d) => {
             return d['平均客單價'];
         })
+
+        let minOfData = d3.min(data,(d)=>{
+            return d['平均客單價'];
+        });
 
         //data reduction
         let dataForDraw = data.map(d => {
