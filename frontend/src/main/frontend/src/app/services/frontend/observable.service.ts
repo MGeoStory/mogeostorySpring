@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import * as d3 from 'd3';
 
 @Injectable()
 export class ObservableService {
+
+    private subjectDataAndTime = new Subject<Map<string, any>>();
 
     private subjectString = new Subject<String[]>();
     private subjectNumber = new Subject<Number[]>();
     private subjectData = new Subject<Object[]>();
     private subjectAny = new Subject<any[]>();
 
+
+    observedDataAndTime = this.subjectDataAndTime.asObservable();
     observedString = this.subjectString.asObservable();
     observedNumber = this.subjectNumber.asObservable();
     observedData = this.subjectData.asObservable();
     observedAny = this.subjectAny.asObservable();
 
+    /**
+     * data:object[], time:number[]
+     * @param dataAndTime 
+     */
+    pushDataAndTime(dataAndTime: Map<string, any>) {
+        this.subjectDataAndTime.next(dataAndTime);
+    }
     /**
      * push Object
      * @param data
