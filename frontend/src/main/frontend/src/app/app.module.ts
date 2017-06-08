@@ -42,10 +42,10 @@ export const pipes = [
 ];
 //home-page
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+// import { AboutComponent } from './about/about.component';
 export const singleComponents = [
   HomeComponent,
-  AboutComponent
+  // AboutComponent
 ];
 
 //post-receipt
@@ -64,7 +64,7 @@ export const PostReceiptComponents = [
 
 //test what i want
 import { TestAllComponent } from './testall/test-all.component';
-export const BackendComponents = [
+export const TestComponents = [
   TestAllComponent,
 ]
 
@@ -102,7 +102,7 @@ export const DisposableIncomeComponents = [
     singleComponents,
     PostReceiptComponents,
     DisposableIncomeComponents,
-    BackendComponents,
+    TestComponents,
     pipes,
 
 

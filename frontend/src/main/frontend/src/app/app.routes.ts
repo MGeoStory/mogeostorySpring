@@ -9,7 +9,8 @@ import { DisposableIncomeComponent } from './post/disposable-income/disposable-i
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'about', component: AboutComponent },
+    // { path: 'about', component: AboutComponent },
+    {path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
     { path: 'test', component: TestAllComponent },
     {
         path: 'post', component: null,
