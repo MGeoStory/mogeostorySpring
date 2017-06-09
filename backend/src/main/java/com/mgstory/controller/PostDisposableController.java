@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.client.RestOperations;
 import java.util.Map;
 
 @RestController
@@ -49,6 +48,5 @@ public class PostDisposableController {
     public Iterable<PostDisposable> findByYearAndCityId(@PathVariable("year") Integer year,
             @PathVariable("cityId") String cityId) {
         logger.info("year={}, cityid={}", year, cityId);
-        return repository.findByYearsAndCityId(year, cityId.toUpperCase());
-    }
+        return repository.findByYearsAndCityId(year, cityId.toUpperCase());    }
 }
