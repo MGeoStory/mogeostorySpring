@@ -1,18 +1,24 @@
 <div class="container">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
         <h1 class='h1'>{{title}}</h1>
-        <h4>{{brief}}</h4>
-
+        <h4>日期：{{date}} | 作者: <a href="{{link}}">{{author}}</a></h4>
         <div class="abstract">
             <blockquote>
-                <p>相較台北、新北或新竹市等地方而言，便利商店在離島(澎湖、金門、馬祖)、彰化和屏東等地，可能是重要的購物場所之一，而非僅只是順手買個方便的地方。</p>
+                <p>相較台北、新北或新竹市等地方而言，便利商店在離島(澎湖、金門、馬祖)、彰化和屏東等地，可能是採買的好去處，而不僅僅只是買個方便的地方。</p>
             </blockquote>
-            <p class="line1">檢視地圖中2013年至2016年的便利商店消費平均客單價資料，可以發現幾項有趣的事情：</p>
+            <p class="line1">透過檢視地圖中2013年至2016年的便利商店消費平均客單價資料，可以發現幾件很不一樣的事情：</p>
             <ul class="listPoints">
-                <li>離島(澎湖、金門、馬祖)、彰化和屏東等地，通常是消費金額最高的前三名；而台北、新北和新竹市等地，則都是消費金額最少的三個地區之一。</li>
-                <li>金門一直到2013年12月才有在便利商店，然後消費金額一直逐年上升。</li>
-                <li>無論南北的便利商店在一月份時，都是平均消費最高的時候，但南部地區也可能在七月達到另一個高峰。</li>
+                <li>便利商店的消費習慣可能存在著區域差異：離島(澎湖、金門、馬祖)、彰化和屏東等地，通常是消費金額最高的前三名；而台北市 、新北市和新竹市等地，則多是消費金額最少的三個地區之一。如果納入其他類型賣場的空間位置與影響範圍，應該可以看到更多資訊。
+                </li>
+                <li>金門一直到2013年12月才有在便利商店：檢視數據之後才發現這件事情，而且金門的消費金額一直逐年上升，這點是因為品項與其他地區有所不同嗎？</li>
+                <li>氣溫對消費金額的影響：無論南北，只要是偏冷的一月，都是平均消費金額最高的時候。另外在南部地區，七月的炎熱也讓便利商店的生意達到另一個高峰。</li>
+
             </ul>
+        </div>
+        <div>
+            <br>
+            <h3>
+                - 相較於我們所看到的，更重要的你如何解讀 -</h3>
             <blockquote>
                 <p>於下方
                     <u>拖動時間軸</u>可以看到不同時間點的消費差異；
@@ -20,21 +26,28 @@
             </blockquote>
         </div>
     </div>
-
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-        <post-receipt-dropdown-list></post-receipt-dropdown-list>
-    </div>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-        <post-receipt-map></post-receipt-map>
-    </div>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-        <div class="row">
-            <div class="clo-lg-6 col-md-6">
-                <post-receipt-line-graph></post-receipt-line-graph>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <post-receipt-bar-graph></post-receipt-bar-graph>
+    <div>
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+            <post-receipt-dropdown-list></post-receipt-dropdown-list>
+        </div>
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+            <post-receipt-map></post-receipt-map>
+        </div>
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+            <div class="row">
+                <div class="clo-lg-6 col-md-6">
+                    <post-receipt-line-graph></post-receipt-line-graph>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <post-receipt-bar-graph></post-receipt-bar-graph>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1">
+    <br> 文章資料來源：
+    <ul>
+        <li><a href="http://data.gov.tw/node/36858">所得房價消費分析-縣市電子發票B2C開立資料集</a></li>
+    </ul>
 </div>

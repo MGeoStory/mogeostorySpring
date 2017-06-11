@@ -9,4 +9,5 @@ import java.util.List;
 @RepositoryRestResource(exported = false)
 public interface ArticleRepository extends PagingAndSortingRepository<Article, Integer> {
     List<Article> findAllByOrderByIdAsc();
+    Article findById(Integer id);
 }
