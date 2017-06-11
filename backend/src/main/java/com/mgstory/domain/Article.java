@@ -15,7 +15,7 @@ import java.util.Date;
 // // @JsonRootName(value = "articles")
 @Entity
 @Table (name = "articles")
-public class Articles implements Serializable {
+public class Article implements Serializable {
 
     // private static final long serialVersionUID = 100001L;
 
@@ -83,6 +83,6 @@ public class Articles implements Serializable {
     public String getRouteLink() {
         return route_link;
     }
-    public Articles() {
+    public Article() {
     }
 }

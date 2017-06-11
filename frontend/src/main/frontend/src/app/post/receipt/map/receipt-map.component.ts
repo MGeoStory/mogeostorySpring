@@ -41,13 +41,14 @@ let colorFeature: d3.ScaleLinear<any, any>;
         this.initialMap();
         thisComponent.mgs.refData.subscribe(
             data => {
-                // console.log(data);
+                thisComponent.getFeatureInfo(data);
+                thisComponent.mappingMap();
                 if (isFirstLoading) {
+                    console.log("isFirstLoading");
                     thisComponent.updateInfoControl(null);
-                    thisComponent.getFeatureInfo(data);
-                    thisComponent.mappingMap();
                     isFirstLoading = false;
                 } else {
+                    console.log("is Not fisrtloadin");
                     this.resetLayersStyle(valueOfFeatures);
                     this.getFeatureInfo(data);
                     thisComponent.resetHighlightedFeature();
@@ -63,7 +64,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
    */
     resetLayersStyle(valueOfFeatures: d3.Map<{}>) {
         layerOfGeoJSON.setStyle((feature) => {
-            return { fillColor: this.getFillColor(feature.properties["COUNTYID"])}
+            return { fillColor: this.getFillColor(feature.properties["COUNTYID"]) }
         });
     }
 

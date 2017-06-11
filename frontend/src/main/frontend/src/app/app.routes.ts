@@ -13,10 +13,10 @@ export const routes: Routes = [
     {path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
     { path: 'test', component: TestAllComponent },
     {
-        path: 'post', component: null,
+        path: 'article', component: null,
         children: [
-            { path: 'receipt', component: PostReceiptComponent },
-            { path: 'disposable-income', component: DisposableIncomeComponent },
+            { path: '00001', component: PostReceiptComponent },
+            { path: '01000', component: DisposableIncomeComponent },
         ],
     }
 ];

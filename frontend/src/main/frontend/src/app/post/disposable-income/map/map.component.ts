@@ -13,6 +13,7 @@ let colorizeFeatures: d3.ScaleLinear<any, any>;
 let valueOfFeatures: d3.Map<{}> = d3.map();
 let featuresUserClicked: L.FeatureGroup;
 
+
 @Component({
   selector: 'post-disposable-income-map',
   templateUrl: 'map.component.html',
