@@ -92,7 +92,6 @@ export class GraphCanvasService extends GraphFrameService {
     *the graph-frame is the id of Frame; it was created by createCanvasT extends graph-frame.addFrame;
     */
     createCanvas(IdOfHtml: string, htmlElement: any): d3.Selection<any, any, any, any> {
-
         //if #id is empty=>return true
         let graphFrameIsEmpty: boolean = d3.select(`#${IdOfHtml}`).empty();
 

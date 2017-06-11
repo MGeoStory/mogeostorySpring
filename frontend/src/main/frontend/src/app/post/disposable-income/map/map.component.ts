@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import * as L from 'leaflet';
 
 const MAP_ID: string = 'lmap';
-const GEOJSON_DATA: string = 'assets/geodata/county_tw-ms.json';
+const GEOJSON_DATA: string = 'assets/geodata/county_tw-ms1.json';
 let map: L.Map;
 let layersOfCounty: L.GeoJSON;
 // let isFirstLoading: boolean = true;

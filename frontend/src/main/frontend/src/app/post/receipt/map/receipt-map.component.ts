@@ -31,7 +31,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
 
 }) export class ReceiptMapComponent implements OnInit {
 
-    private GEOJSON_DATA: string = 'assets/geodata/county_tw-ms.json';
+    private GEOJSON_DATA: string = 'assets/geodata/county_tw-ms1.json';
 
     constructor(private mgs: ObservableService, private lms: LMapSettingService) {
     }
