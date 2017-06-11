@@ -216,7 +216,7 @@ let colorFeature: d3.ScaleLinear<any, any>;
         featuresClicked = e.target;
         featuresClicked.setStyle({
             weight: 4,
-            color: '#666',
+            color: 'blue',
             dashArray: '',
             fillOpacity: 1
         });

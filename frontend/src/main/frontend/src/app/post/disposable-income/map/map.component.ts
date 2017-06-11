@@ -153,7 +153,7 @@ export class MapComponent implements OnInit {
     featuresUserClicked = e.target;
     featuresUserClicked.setStyle({
       weight: 4,
-      color: '#666',
+      color: 'blue',
       dashArray: '',
       fillOpacity: 1
     });
