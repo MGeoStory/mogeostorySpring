@@ -83,4 +83,5 @@ public class Earthquake implements Serializable {
 
     public Earthquake() {
     }
+
 }
