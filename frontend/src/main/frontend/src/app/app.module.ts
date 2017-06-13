@@ -27,9 +27,11 @@ export const FrontendServices = [
 //backend service
 import { ArticleControllerService } from './services/backend/articlesController.service';
 import { PostDisposableService } from './services/backend/post-disposable.service';
+import {EarthquakeService} from 'app/services/backend/earthquake.service';
 export const BackendServices = [
   ArticleControllerService,
-  PostDisposableService
+  PostDisposableService,
+  EarthquakeService
 ];
 
 

@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
-import java.awt.List;
 
 @RestController
-@RequestMapping(value = "api/v1/earthquake")
+@RequestMapping(value = "api/v1/earthquakes")
 public class EarthquakeController {
 
     Logger log = LoggerFactory.getLogger(EarthquakeController.class);
@@ -33,10 +32,14 @@ public class EarthquakeController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Earthquake findById(@PathVariable Integer id) {
-        Earthquake e = repository.findById(id);
-        log.info(gson.toJson(e));
-        JsonObject geojson= new JsonObject();
+        return repository.findById(id);
+    }
 
+    @RequestMapping(value= "/geo/{id}", method = RequestMethod.GET)
+    public String findGById(@PathVariable Integer id){
+        Earthquake e = repository.findById(id);
+
+        JsonObject geojson= new JsonObject();
         JsonObject geometry= new JsonObject();
         JsonObject properties = new JsonObject();
         geojson.addProperty("type","Feature");
@@ -53,15 +56,12 @@ public class EarthquakeController {
         properties.addProperty("county",e.getCounty().toString());
         properties.addProperty("location",e.getLocation().toString());
         geojson.add("properties",properties);
-        JsonArray array = new JsonArray();
-        array.add(geojson);
-        array.add(geojson);
-        array.add(geojson);
+        // JsonArray array = new JsonArray();
+        // array.add(geojson);
+        // array.add(geojson);
+        // array.add(geojson);
+        // log.info(array.toString());
 
-        // JsonObject[] test = new JsonObject();
-
-
-        log.info(array.toString());
-        return repository.findById(id);
+        return geojson.toString();
     }
 }
