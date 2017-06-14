@@ -44,11 +44,11 @@ let colorFeature: d3.ScaleLinear<any, any>;
                 thisComponent.getFeatureInfo(data);
                 thisComponent.mappingMap();
                 if (isFirstLoading) {
-                    console.log("isFirstLoading");
+                    // console.log("isFirstLoading");
                     thisComponent.updateInfoControl(null);
                     isFirstLoading = false;
                 } else {
-                    console.log("is Not fisrtloadin");
+                    // console.log("is Not fisrtloadin");
                     this.resetLayersStyle(valueOfFeatures);
                     this.getFeatureInfo(data);
                     thisComponent.resetHighlightedFeature();

@@ -6,6 +6,7 @@ import { PostReceiptComponent } from './post/receipt/post-receipt.component';
 import { AboutComponent } from './about/about.component';
 import { TestAllComponent } from './testall/test-all.component';
 import { DisposableIncomeComponent } from './post/disposable-income/disposable-income.component';
+import {EarthquakeComponent} from './post/earthquake/earthquake.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
         children: [
             { path: '00001', component: PostReceiptComponent },
             { path: '01000', component: DisposableIncomeComponent },
+            { path: '02000', component:EarthquakeComponent}
         ],
     }
 ];

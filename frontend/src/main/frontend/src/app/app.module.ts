@@ -48,6 +48,15 @@ export const singleComponents = [
   // AboutComponent
 ];
 
+
+//test what i want
+import { TestAllComponent } from './testall/test-all.component';
+export const TestComponents = [
+  TestAllComponent,
+]
+
+import { routing } from './app.routes';
+
 //post-receipt
 import { PostReceiptComponent } from './post/receipt/post-receipt.component';
 import { DropdownListComponent } from './post/receipt/dropdown-list/dropdown-list.component'
@@ -61,14 +70,6 @@ export const PostReceiptComponents = [
   BarGraph,
   LineGraphComponent,
 ];
-
-//test what i want
-import { TestAllComponent } from './testall/test-all.component';
-export const TestComponents = [
-  TestAllComponent,
-]
-
-import { routing } from './app.routes';
 
 //post-disposable-income
 import { DisposableIncomeComponent } from './post/disposable-income/disposable-income.component';
@@ -84,6 +85,13 @@ export const DisposableIncomeComponents = [
   TableComponent
 ];
 
+//post-earthquake
+import {EarthquakeComponent} from './post/earthquake/earthquake.component';
+import { EarthquakeMapComponent } from './post/earthquake/map/earthquake-map.component';
+export const EarthquakeComponents =[
+  EarthquakeComponent,
+  EarthquakeMapComponent
+]
 
 @NgModule({
   imports: [
@@ -100,12 +108,11 @@ export const DisposableIncomeComponents = [
   declarations: [
     AppComponent,
     singleComponents,
-    PostReceiptComponents,
-    DisposableIncomeComponents,
     TestComponents,
     pipes,
-
-
+    PostReceiptComponents,
+    DisposableIncomeComponents,
+    EarthquakeComponents
   ],
   providers: [
     BackendServices,

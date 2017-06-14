@@ -1,7 +1,5 @@
 package com.mgstory.controller;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mgstory.repository.EarthquakeRepository;
 import com.mgstory.domain.Earthquake;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 @RestController
 @RequestMapping(value = "api/v1/earthquakes")
@@ -38,12 +38,12 @@ public class EarthquakeController {
     @RequestMapping(value= "/geo/{id}", method = RequestMethod.GET)
     public String findGById(@PathVariable Integer id){
         Earthquake e = repository.findById(id);
-
+        
         JsonObject geojson= new JsonObject();
         JsonObject geometry= new JsonObject();
         JsonObject properties = new JsonObject();
-        geojson.addProperty("type","Feature");
 
+        geojson.addProperty("type","Feature");
         geometry.addProperty("type","Point");
         geometry.addProperty("cordinates","["+e.getLng().toString()+","+e.getLat().toString()+"]");
         geojson.add("geometry",new Gson().toJsonTree(geometry));
