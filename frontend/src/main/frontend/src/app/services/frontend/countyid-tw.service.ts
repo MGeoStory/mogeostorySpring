@@ -1,5 +1,7 @@
+import { Injectable } from '@angular/core';
 import * as d3 from 'd3';
 
+@Injectable()
 export class CountyIdTWService {
     private countyIdOfTW: Array<Object> = [];
     private countyList: d3.Map<{}>;

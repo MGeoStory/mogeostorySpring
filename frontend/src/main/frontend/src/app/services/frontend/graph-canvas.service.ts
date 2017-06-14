@@ -1,7 +1,9 @@
 import * as d3 from 'd3';
 import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
+import { Injectable } from '@angular/core';
 
 //that's extends could work probably, but the problem is how to super(parms)?
+@Injectable()
 export class GraphCanvasService extends GraphFrameService {
     canvas: d3.Selection<any, any, any, any>;
 

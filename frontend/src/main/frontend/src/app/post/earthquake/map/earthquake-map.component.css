@@ -1,20 +1,14 @@
-
 /*http://leafletjs.com/examples/mobile*/
-#lmap { 
-    height: 50vh;
+#leaf-map { 
+    height: 40vh;
     width: auto; 
     /*margin-right: 12vh;*/
 }
 
 @media (min-width: 1200px) {
-    #lmap { 
+    #leaf-map { 
         width: auto;
-        height:50vh;
+        height:40vh;
         margin: 0px auto;
     }
-}
-
-.resetControl{
-    color:white;
-    font-size: 1.8rem;
 }

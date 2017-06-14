@@ -96,6 +96,7 @@ export class MapComponent implements OnInit {
    */
   mappingTaiwanByCounty(valueOfFeatures: d3.Map<{}>): void {
     d3.json(GEOJSON_DATA, (geoData) => {
+      console.log(geoData);
       layersOfCounty = L.geoJSON(geoData, {
         style: (feature) => {
           return {

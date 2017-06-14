@@ -1,6 +1,8 @@
 import * as d3 from 'd3';
+import { Injectable } from '@angular/core';
 
 //this class is the frame of graph
+@Injectable()
 export class GraphFrameService {
     frame: d3.Selection<any, any, any, any>;
     protected width: number;

@@ -1,6 +1,7 @@
 import * as L from 'leaflet';
+import { Injectable } from '@angular/core';
 
-//
+@Injectable()
 export class LMapSettingService {
     private mapboxTileLayer: L.TileLayer;
     private mapboxUrl: string;

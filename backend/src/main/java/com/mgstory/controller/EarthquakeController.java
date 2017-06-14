@@ -2,6 +2,7 @@ package com.mgstory.controller;
 
 import com.mgstory.repository.EarthquakeRepository;
 import com.mgstory.domain.Earthquake;
+import com.vividsolutions.jts.geom.Geometry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,28 +40,41 @@ public class EarthquakeController {
     public String findGById(@PathVariable Integer id){
         Earthquake e = repository.findById(id);
         
-        JsonObject geojson= new JsonObject();
-        JsonObject geometry= new JsonObject();
+        //first{"type","FeatureCollection"} 
+        JsonObject geojson = new JsonObject();
+        geojson.addProperty("type","FeatureCollection");
+
+        //first{"features",points}
+        JsonObject featrues = new JsonObject();
+        JsonArray points = new JsonArray();
+        featrues.add("featrues", points);
+        
+        //{"features":[{"type","Feature"}]}
+        JsonObject point = new JsonObject();
+        point.addProperty("type","Feature");
+        
+        //{"features":[{"properties",{"id",id}}]}
         JsonObject properties = new JsonObject();
+        properties.addProperty("id",e.getId());
 
-        geojson.addProperty("type","Feature");
+        //{"features":[{"geometry":{"type","Point"}}]}
+        JsonObject geometry = new JsonObject();
         geometry.addProperty("type","Point");
-        geometry.addProperty("cordinates","["+e.getLng().toString()+","+e.getLat().toString()+"]");
-        geojson.add("geometry",new Gson().toJsonTree(geometry));
 
-        properties.addProperty("id",e.getId().toString());
-        properties.addProperty("code",e.getCode().toString());
-        properties.addProperty("date",e.getDate().toString());
-        properties.addProperty("deep",e.getDeep().toString());
-        properties.addProperty("scale",e.getScale().toString());
-        properties.addProperty("county",e.getCounty().toString());
-        properties.addProperty("location",e.getLocation().toString());
-        geojson.add("properties",properties);
-        // JsonArray array = new JsonArray();
-        // array.add(geojson);
-        // array.add(geojson);
-        // array.add(geojson);
-        // log.info(array.toString());
+        //{"features":[{"geometry":{"coordinates",lngLat}}]}
+        double[] lngLat = {e.getLng(),e.getLat()};
+        geometry.add("coordinates", new Gson().toJsonTree(lngLat));
+        
+        //single point
+        point.add("properties",properties);
+        point.add("geometry",geometry);
+        
+        //add all points
+        points.add(point);
+        points.add(point);
+
+        //add points to features
+        geojson.add("features",points);
 
         return geojson.toString();
     }
