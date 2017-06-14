@@ -22,7 +22,7 @@ export class EarthquakeService {
     getEarthquakeGById(id: number): Observable<Object> {
         return this.http.get(`${this.url}/geo/${id}`).
             map((res: Response) => {
-                console.log(res);
+                // console.log(res);
                 return res.json();
             })
     }
