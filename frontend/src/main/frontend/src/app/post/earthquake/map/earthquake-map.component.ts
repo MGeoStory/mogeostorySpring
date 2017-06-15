@@ -15,30 +15,28 @@ export class EarthquakeMapComponent implements OnInit {
     private map: L.Map;
     private layerOfEarthquakes: L.GeoJSON;
     private GEOJSON_DATA: string = 'assets/geodata/earthquake-test.json';
-
+    private geojsonMarkerOptions = {
+                radius: 1,
+                fillColor: "#ff7800",
+                color: "#ff7800",
+                weight: 1,
+                opacity: 0.3,
+                fillOpacity: 0.3
+            };
 
     constructor(private lms: LMapSettingService, private es: EarthquakeService) { }
 
     ngOnInit() {
         this.map = this.lms.initMap(this.MAPID);
-
-        this.es.getEarthquakeGById(1).subscribe(
+        this.es.getEarthquakesG().subscribe(
             (geoData: any) => {
-                
                 L.geoJSON(geoData, {
                     pointToLayer: (feature, latlng) => {
-                        return L.circleMarker(latlng, () => {
-                            return {
-                                radius: 100000,
-                                fillColor: "red",
-                                color: "#000",
-                                weight: 1,
-                                opacity: 1,
-                                fillOpacity: 0.8
-                            }
-                        });
+                        return L.circleMarker(latlng, this.geojsonMarkerOptions);
                     }
                 }).addTo(this.map);
-            });
+                this.map.setZoom(6);
+            }
+        )
     }
 }

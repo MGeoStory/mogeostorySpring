@@ -24,9 +24,6 @@ public class Earthquake implements Serializable {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "date_")
-    private Date date_;
-
     @Column(name = "lng")
     private Double lng;
 
@@ -39,11 +36,11 @@ public class Earthquake implements Serializable {
     @Column(name = "scale")
     private Double scale;
 
-    @Column(name = "county")
-    private String county;
+    @Column(name = "year_")
+    private Integer year;
 
-    @Column(name = "location_")
-    private String location_;
+    @Column(name = "region")
+    private String region;
 
     public Integer getId() {
         return id;
@@ -52,11 +49,6 @@ public class Earthquake implements Serializable {
     public String getCode() {
         return code;
     }
-
-    public Date getDate() {
-        return date_;
-    }
-
     public Double getLng() {
         return lng;
     }
@@ -73,12 +65,12 @@ public class Earthquake implements Serializable {
         return scale;
     }
 
-    public String getCounty() {
-        return county;
+    public String getRegion() {
+        return region;
     }
 
-    public String getLocation() {
-        return location_;
+    public Integer getYear(){
+        return year;
     }
 
     public Earthquake() {

@@ -27,11 +27,13 @@ export class EarthquakeService {
             })
     }
 
-    getArticleById(id: number): Observable<Object> {
-        return this.http.get(`${this.url}/${id}`).
-            map((res: Response) => {
+    getEarthquakesG():Observable<Object>{
+        return this.http.get(`${this.url}/geo`).
+            map((res:Response)=>{
+                console.log(res.json());
                 return res.json();
-            })
+            });
     }
+
 
 }

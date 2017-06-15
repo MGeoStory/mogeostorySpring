@@ -15,10 +15,10 @@ export class TestAllComponent {
 
     getData() {
         console.log('clcik button');
-        this.es.getEarthquakeGById(1).subscribe(
+        this.es.getEarthquakesG().subscribe(
             data => {
                 // this.data = data;
-                this.data =JSON.stringify(data);
+                // this.data =JSON.stringify(data);
                 // console.log(JSON.stringify(data));
             });
     }
