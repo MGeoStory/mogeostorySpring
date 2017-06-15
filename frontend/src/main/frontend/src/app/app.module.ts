@@ -85,13 +85,8 @@ export const DisposableIncomeComponents = [
   TableComponent
 ];
 
-//post-earthquake
-import {EarthquakeComponent} from './post/earthquake/earthquake.component';
-import { EarthquakeMapComponent } from './post/earthquake/map/earthquake-map.component';
-export const EarthquakeComponents =[
-  EarthquakeComponent,
-  EarthquakeMapComponent
-]
+import {EarthquakeModule} from './post/earthquake/earthquake.module';
+
 
 @NgModule({
   imports: [
@@ -102,7 +97,8 @@ export const EarthquakeComponents =[
     DropdownModule.forRoot(),
     ModalModule.forRoot(),
     SelectModule,
-    NouisliderModule
+    NouisliderModule,
+    EarthquakeModule
 
   ],
   declarations: [
@@ -112,7 +108,6 @@ export const EarthquakeComponents =[
     pipes,
     PostReceiptComponents,
     DisposableIncomeComponents,
-    EarthquakeComponents
   ],
   providers: [
     BackendServices,
