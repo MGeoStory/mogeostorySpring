@@ -7,9 +7,9 @@ import { DisposableIncomeComponent } from './disposable-income/disposable-income
 import { EarthquakeComponent } from './earthquake/earthquake.component';
 
 const routes: Routes = [
-    { path: '00001', component: PostReceiptComponent },
-    { path: '01000', component: DisposableIncomeComponent },
-    { path: '02000', component: EarthquakeComponent }
+    { path: '1', component: PostReceiptComponent },
+    { path: '2', component: DisposableIncomeComponent },
+    { path: '3', component: EarthquakeComponent }
 ];
 
 @NgModule({
