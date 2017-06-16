@@ -1,11 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import './rxjs-extensions';
 
+import { SharedModule } from './shared/shared.module';
 
+//home-page
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -18,7 +19,7 @@ import { ModalModule } from 'ng2-bootstrap';
 import { ObservableService } from './services/frontend/observable.service';
 import { LMapSettingService } from './services/frontend/lmap-setting.service';
 import { CountyIdTWService } from './services/frontend/countyid-tw.service';
-export const FrontendServices = [
+export const FrontendServicesForAll = [
   ObservableService,
   LMapSettingService,
   CountyIdTWService
@@ -26,12 +27,11 @@ export const FrontendServices = [
 
 //backend service
 import { ArticleControllerService } from './services/backend/articlesController.service';
-
-//home-page
-import { HomeComponent } from './home/home.component';
+export const BackednServicesForAll = [
+  ArticleControllerService
+];
 
 import { AppRouting } from './app-routing';
-
 
 @NgModule({
   imports: [
@@ -43,13 +43,13 @@ import { AppRouting } from './app-routing';
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
     NavComponent,
+    HomeComponent,
     FooterComponent
   ],
   providers: [
-    ArticleControllerService,
-    FrontendServices,
+    FrontendServicesForAll,
+    BackednServicesForAll
   ],
   bootstrap: [AppComponent]
 })
