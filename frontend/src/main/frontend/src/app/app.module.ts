@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+
 import { AppComponent } from './app.component';
 import './rxjs-extensions';
 
@@ -26,19 +26,15 @@ import { ArticleControllerService } from './services/backend/articlesController.
 //home-page
 import { HomeComponent } from './home/home.component';
 
-import { ArticlesModule } from './post/articles.module';
 import { AppRouting } from './app-routing';
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
     AppRouting,
+    SharedModule,
     ModalModule.forRoot(),
     DropdownModule.forRoot(),
-    ArticlesModule,
-
   ],
   declarations: [
     AppComponent,
