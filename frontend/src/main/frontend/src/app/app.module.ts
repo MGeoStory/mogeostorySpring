@@ -5,6 +5,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import './rxjs-extensions';
 
+
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
+
 //ng2-Moudle
 import { DropdownModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
@@ -28,6 +32,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AppRouting } from './app-routing';
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,6 +44,8 @@ import { AppRouting } from './app-routing';
   declarations: [
     AppComponent,
     HomeComponent,
+    NavComponent,
+    FooterComponent
   ],
   providers: [
     ArticleControllerService,
