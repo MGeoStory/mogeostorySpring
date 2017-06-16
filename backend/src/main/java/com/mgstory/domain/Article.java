@@ -39,8 +39,8 @@ public class Article implements Serializable {
     @Column(name = "image_link")
     private String image_link;
 
-    @Column(name = "tags")
-    private String tags;
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "post_date")
     private Date post_date;
@@ -72,8 +72,8 @@ public class Article implements Serializable {
         return image_link;
     }
 
-    public String getTags() {
-        return tags;
+    public String getCode() {
+        return code;
     }
 
     public Date getPostDate() {
