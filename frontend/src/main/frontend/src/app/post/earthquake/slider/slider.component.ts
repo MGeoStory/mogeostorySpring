@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EarthquakeService } from 'app/services/backend/earthquake.service';
+import * as L from 'leaflet';
+import * as d3 from 'd3';
 
 @Component({
     selector: 'article-earthquake-slider',
@@ -31,6 +33,7 @@ export class SliderComponent implements OnInit {
         this.es.getEarthquakesG().subscribe(
             (geoData) => {
                 console.log(geoData);
+                this.geoData = geoData;
                 //pushTo
             }
         )
@@ -68,20 +71,39 @@ export class SliderComponent implements OnInit {
             this.es.getEarthquakeGBetweenYears(this.range[0], this.range[1]).subscribe(
                 (geoData) => {
                     this.geoData = geoData;
-                    // console.log(this.geoData);
                     this.filterDataAndPush(this.geoData, this.scale, this.region);
                 }
             );
         } else {
+            console.log(false);
             this.filterDataAndPush(this.geoData, this.scale, this.region);
             // console.log(this.geoData);
         }
     }
 
-    filterDataAndPush(geoData: Object, scale: number[], region: string): void {
-        let push:Object;
-        console.log(geoData);
-        
+    filterDataAndPush(data: Object, scale: number[], region: string): void {
+        //type problem
+        let geoData: any = data;
+        let layers: L.GeoJSON;
+
+        console.log(`${scale},${region}`);
+        layers = L.geoJSON(geoData, {
+            filter: (feature) => {
+                let r = feature.properties['region'];
+                let s = feature.properties['scale'];
+                //region = get all from database, including no region rows
+                if (region = "A") {
+                    return s >= scale[0] && s <= scale[1] + 1;
+                } else {
+                    return s >= scale[0] && s <= scale[1] + 1 && r == region;
+                }
+            }
+        });
+
+        layers.setStyle((feature) => {
+            console.log(feature);
+            return { fillColor: 'red' }
+        });
     }
 
     /**

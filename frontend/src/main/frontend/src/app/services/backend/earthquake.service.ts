@@ -38,6 +38,7 @@ export class EarthquakeService {
     getEarthquakeGBetweenYears(min: number, max: number): Observable<Object> {
         return this.http.get(`${this.url}/geo/year/${min}/${max}`)
             .map((response: Response) => {
+                // console.log(response.json());
                 return response.json()
             });
     }
