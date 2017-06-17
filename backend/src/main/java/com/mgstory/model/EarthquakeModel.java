@@ -73,6 +73,10 @@ public class EarthquakeModel {
             //{"features":[{"properties",{"id",id}}]}
             JsonObject properties = new JsonObject();
             properties.addProperty("id", e.getId());
+            properties.addProperty("deep",e.getDeep());
+            properties.addProperty("scale",e.getScale());
+            properties.addProperty("region",e.getRegion());
+            properties.addProperty("year",e.getYear());
 
             //{"features":[{"geometry":{"type","Point"}}]}
             JsonObject geometry = new JsonObject();

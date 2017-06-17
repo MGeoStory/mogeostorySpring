@@ -1,0 +1,13 @@
+#drag-slider{
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+.noUi-horizontal .noUi-tooltip{
+    padding: 1px; 
+    bottom:90%;
+}
+
+.btn-success {
+ padding: 0.3em 0.3em;
+}

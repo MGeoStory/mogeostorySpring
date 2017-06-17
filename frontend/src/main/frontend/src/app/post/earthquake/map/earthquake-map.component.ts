@@ -11,32 +11,36 @@ import * as L from 'leaflet';
 })
 
 export class EarthquakeMapComponent implements OnInit {
+    private timeCal: number[] = [];
     private MAPID: string = 'leaf-map';
     private map: L.Map;
     private layerOfEarthquakes: L.GeoJSON;
     private GEOJSON_DATA: string = 'assets/geodata/earthquake-test.json';
     private geojsonMarkerOptions = {
-                radius: 1,
-                fillColor: "#ff7800",
-                color: "#ff7800",
-                weight: 1,
-                opacity: 0.3,
-                fillOpacity: 0.3
-            };
+        radius: 1,
+        color: "#ff7800",
+        // weight: 1,
+        opacity: 0.1,
+    };
 
     constructor(private lms: LMapSettingService, private es: EarthquakeService) { }
 
     ngOnInit() {
         this.map = this.lms.initMap(this.MAPID);
-        this.es.getEarthquakesG().subscribe(
-            (geoData: any) => {
-                L.geoJSON(geoData, {
-                    pointToLayer: (feature, latlng) => {
-                        return L.circleMarker(latlng, this.geojsonMarkerOptions);
-                    }
-                }).addTo(this.map);
-                this.map.setZoom(6);
-            }
-        )
+        // this.timeCal[0] = new Date().getTime();
+        // this.es.getEarthquakesG().subscribe(
+        //     (geoData: any) => {
+        //         L.geoJSON(geoData, {
+        //             pointToLayer: (feature, latlng) => {
+        //                 // console.log(feature.properties["scale"]);
+        //                 this.geojsonMarkerOptions.radius = feature.properties["scale"]*feature.properties["scale"]/4;
+        //                 return L.circleMarker(latlng, this.geojsonMarkerOptions);
+        //             }
+        //         }).addTo(this.map);
+        //         this.map.setZoom(6);
+        //         this.timeCal[1] = new Date().getTime();
+        //         console.log("====="+(this.timeCal[1] - this.timeCal[0])/1000)+"=====";
+        //     }
+        // )
     }
 }
