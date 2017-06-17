@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import * as d3 from 'd3';
+import { EarthquakeService } from 'app/services/backend/earthquake.service';
 
 @Component({
     selector: 'article-earthquake-slider',
@@ -14,27 +14,39 @@ export class SliderComponent implements OnInit {
     private defScaleRange;
     private sliderYearConfig: any;
     private sliderScaleConfig: any;
-    private region: string = 'tw';
+    private range: number[] = [1995, 2017];
+    private scale: number[] = [1, 7]
+    private region: string = 'A';
+    private geoData: Object;
 
-    constructor() {
+
+    constructor(private es: EarthquakeService) {
     }
 
     ngOnInit() {
         this.setYearNouiSlider();
         this.setScaleNouiSlider();
-
         this.loadingHTML();
+
+        this.es.getEarthquakesG().subscribe(
+            (geoData) => {
+                console.log(geoData);
+                //pushTo
+            }
+        )
     }
 
     /**
     * monitor the user slecet in slider bar
     */
     onYearChange(range: number[]): void {
-        console.log(range);
+        this.range = range;
+        this.reloadData(true);
     }
 
     onScaleChange(scale: number[]): void {
-        console.log(scale);
+        this.scale = scale;
+        this.reloadData(false);
     }
 
     onRegionChange(region: string): void {
@@ -44,9 +56,33 @@ export class SliderComponent implements OnInit {
         } else {
             this.region = region;
         }
-        console.log(this.region);
+        this.reloadData(false);
     }
 
+    /**reload:boolean
+    true=> use year to sql and filter by this.scale and this.region
+    */
+    reloadData(reload: boolean) {
+        if (reload) {
+            //same year is workable too.
+            this.es.getEarthquakeGBetweenYears(this.range[0], this.range[1]).subscribe(
+                (geoData) => {
+                    this.geoData = geoData;
+                    // console.log(this.geoData);
+                    this.filterDataAndPush(this.geoData, this.scale, this.region);
+                }
+            );
+        } else {
+            this.filterDataAndPush(this.geoData, this.scale, this.region);
+            // console.log(this.geoData);
+        }
+    }
+
+    filterDataAndPush(geoData: Object, scale: number[], region: string): void {
+        let push:Object;
+        console.log(geoData);
+        
+    }
 
     /**
      * set the all values of nouiSlider

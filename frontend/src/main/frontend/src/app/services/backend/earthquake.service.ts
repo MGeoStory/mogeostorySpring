@@ -27,11 +27,18 @@ export class EarthquakeService {
             })
     }
 
-    getEarthquakesG():Observable<Object>{
+    getEarthquakesG(): Observable<Object> {
         return this.http.get(`${this.url}/geo`).
-            map((res:Response)=>{
-                console.log(res.json());
+            map((res: Response) => {
+                // console.log(res.json());
                 return res.json();
+            });
+    }
+
+    getEarthquakeGBetweenYears(min: number, max: number): Observable<Object> {
+        return this.http.get(`${this.url}/geo/year/${min}/${max}`)
+            .map((response: Response) => {
+                return response.json()
             });
     }
 

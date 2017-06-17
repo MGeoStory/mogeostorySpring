@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LMapSettingService } from 'app/services/frontend/lmap-setting.service';
 import { ObservableService } from 'app/services/frontend/observable.service';
 import { EarthquakeService } from 'app/services/backend/earthquake.service';
+
 import * as L from 'leaflet';
 
 @Component({
@@ -23,11 +24,10 @@ export class EarthquakeMapComponent implements OnInit {
         opacity: 0.1,
     };
 
-    constructor(private lms: LMapSettingService, private es: EarthquakeService) { }
+    constructor(private lms: LMapSettingService, private bs: EarthquakeService) { }
 
     ngOnInit() {
         this.map = this.lms.initMap(this.MAPID);
-        // this.timeCal[0] = new Date().getTime();
         // this.es.getEarthquakesG().subscribe(
         //     (geoData: any) => {
         //         L.geoJSON(geoData, {
