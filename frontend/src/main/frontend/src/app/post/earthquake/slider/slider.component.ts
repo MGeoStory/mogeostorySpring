@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EarthquakeService } from 'app/services/backend/earthquake.service';
+import {ObservableService} from 'app/services/frontend/observable.service';
 import * as L from 'leaflet';
 import * as d3 from 'd3';
 
@@ -22,7 +23,7 @@ export class SliderComponent implements OnInit {
     private geoData: Object;
 
 
-    constructor(private es: EarthquakeService) {
+    constructor(private es: EarthquakeService, private os:ObservableService) {
     }
 
     ngOnInit() {
@@ -32,9 +33,9 @@ export class SliderComponent implements OnInit {
 
         this.es.getEarthquakesG().subscribe(
             (geoData) => {
-                console.log(geoData);
+                // console.log(geoData);
                 this.geoData = geoData;
-                //pushTo
+                this.filterDataAndPush(this.geoData,this.scale,this.region);
             }
         )
     }
@@ -92,18 +93,14 @@ export class SliderComponent implements OnInit {
                 let r = feature.properties['region'];
                 let s = feature.properties['scale'];
                 //region = get all from database, including no region rows
-                if (region = "A") {
-                    return s >= scale[0] && s <= scale[1] + 1;
+                if (region == "A") {
+                    return s >= scale[0] && s <= (scale[1] + 1);
                 } else {
-                    return s >= scale[0] && s <= scale[1] + 1 && r == region;
+                    return s >= scale[0] && s <= (scale[1] + 1) && r == region;
                 }
             }
         });
-
-        layers.setStyle((feature) => {
-            console.log(feature);
-            return { fillColor: 'red' }
-        });
+        this.os.pushGeoLayer(layers);
     }
 
     /**

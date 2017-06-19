@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import * as d3 from 'd3';
+import * as L from 'leaflet';
 
 @Injectable()
 export class ObservableService {
@@ -11,6 +12,7 @@ export class ObservableService {
     private subjectNumber = new Subject<Number[]>();
     private subjectData = new Subject<Object[]>();
     private subjectAny = new Subject<any[]>();
+    private subjectGeoLayer = new Subject<L.GeoJSON>();
 
 
     observedDataAndTime = this.subjectDataAndTime.asObservable();
@@ -18,6 +20,13 @@ export class ObservableService {
     observedNumber = this.subjectNumber.asObservable();
     observedData = this.subjectData.asObservable();
     observedAny = this.subjectAny.asObservable();
+    observedGeoLayer = this.subjectGeoLayer.asObservable();
+
+
+    pushGeoLayer(geoLayer:L.GeoJSON){
+        this.subjectGeoLayer.next(geoLayer);
+    }
+
 
     /**
      * data:object[], time:number[]

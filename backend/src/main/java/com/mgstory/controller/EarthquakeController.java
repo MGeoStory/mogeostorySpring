@@ -39,8 +39,8 @@ public class EarthquakeController {
 
     @RequestMapping(value = "/geo/year/{min}/{max}", method = RequestMethod.GET)
     public String findGeoByYearBetween (@PathVariable(value="min") Integer min,@PathVariable(value="max") Integer max) {
-        log.info(min.toString());
-        log.info(max.toString());
+        // log.info(min.toString());
+        // log.info(max.toString());
         Iterable<Earthquake> es = repository.findByYearBetween(min,max);
         String geojson = model.getGeoFromEarthquakes(es);
         return geojson;
