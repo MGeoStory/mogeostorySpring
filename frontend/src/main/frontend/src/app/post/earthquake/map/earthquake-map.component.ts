@@ -17,13 +17,13 @@ export class EarthquakeMapComponent implements OnInit {
     private map: L.Map;
     private layerOfEarthquakes: L.GeoJSON;
     private GEOJSON_DATA: string = 'assets/geodata/earthquake-test.json';
-    private geojsonMarkerOptions = {
+    private geojsonMarkerOptions:any = {
         radius: 1,
         color: "#ff7800",
         // weight: 1,
         opacity: 0.1,
     };
-    private t;
+    private layers: L.GeoJSON;
 
     constructor(private lms: LMapSettingService, private os: ObservableService) { }
 
@@ -32,11 +32,11 @@ export class EarthquakeMapComponent implements OnInit {
         this.os.observedGeoLayer.subscribe(
             (geoLayer) => {
                 // this.map.remove();
-                if (this.t != null) {
-                    console.log(this.t);
-                    this.map.removeLayer(this.t);
+                if (this.layers != null) {
+                    // console.log(this.t);
+                    this.map.removeLayer(this.layers);
                 }
-                this.t = L.geoJSON(geoLayer.toGeoJSON(), {
+                this.layers = L.geoJSON(geoLayer.toGeoJSON(), {
                     pointToLayer: (feature, latlng) => {
                         // console.log(feature.properties["scale"]);
                         this.geojsonMarkerOptions.radius = feature.properties["scale"] * feature.properties["scale"] / 4;
