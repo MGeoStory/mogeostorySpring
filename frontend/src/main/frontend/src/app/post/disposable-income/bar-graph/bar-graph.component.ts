@@ -7,8 +7,6 @@ import { PostDisposableService } from 'app/services/backend/post-disposable.serv
 let gc = new GraphCanvasService();
 let canvas: d3.Selection<any, any, any, any>;
 let valueOfCounty: Object[] = [];
-let isFirstLoading: boolean = true;
-
 
 @Component({
     selector: 'post-disposable-income-bar-graph',
@@ -27,8 +25,6 @@ export class BarGraphComponent implements OnInit {
     constructor(private obs: ObservableService, private cId: CountyIdTWService, private pds: PostDisposableService) { }
 
     ngOnInit() {
-        isFirstLoading = true;
-
         //user click map 
         this.obs.observedString.subscribe(
             (userClicked: string[]) => {

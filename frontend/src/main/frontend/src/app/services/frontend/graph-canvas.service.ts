@@ -10,6 +10,7 @@ export class GraphCanvasService extends GraphFrameService {
     //variable of function
     xScaleBand: d3.ScaleBand<string>;
     xScaleTime: d3.ScaleTime<number, number>;
+    xScaleLinear: d3.ScaleLinear<number, number>;
     yScaleLinear: d3.ScaleLinear<number, number>;
     zScaleOrdinal: d3.ScaleOrdinal<String, {}>;
     //http://bl.ocks.org/zanarmstrong/05c1e95bf7aa16c4768e
@@ -21,7 +22,8 @@ export class GraphCanvasService extends GraphFrameService {
         super();
         this.xScaleBand = d3.scaleBand().range([0, this.getFrameWidth()]).paddingInner(0.1);
         this.xScaleTime = d3.scaleTime().range([0, this.getFrameWidth()]);
-
+        this.xScaleLinear = d3.scaleLinear().range([0, this.getFrameWidth()]);
+        
         this.yScaleLinear = d3.scaleLinear().range([this.getFrameHeight(), 0]);
 
         //colors that select from d3.shemeCategory20b
