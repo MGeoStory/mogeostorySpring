@@ -23,7 +23,7 @@ export class GraphCanvasService extends GraphFrameService {
         this.xScaleBand = d3.scaleBand().range([0, this.getFrameWidth()]).paddingInner(0.1);
         this.xScaleTime = d3.scaleTime().range([0, this.getFrameWidth()]);
         this.xScaleLinear = d3.scaleLinear().range([0, this.getFrameWidth()]);
-        
+
         this.yScaleLinear = d3.scaleLinear().range([this.getFrameHeight(), 0]);
 
         //colors that select from d3.shemeCategory20b
@@ -63,12 +63,19 @@ export class GraphCanvasService extends GraphFrameService {
     }
 
     /**
-    *create axis of linear scale
+    *create y axis of linear scale
     */
     yAxisOfLinear(): d3.Axis<any> {
         return d3.axisLeft(this.yScaleLinear);
     }
 
+
+    /**
+    *create x axis of linear scale in Top
+    */
+    xAxisOfLinearTop(): d3.Axis<any> {
+        return d3.axisTop(this.xScaleLinear);
+    }
 
     /** 
     *create grid line of linear scale
@@ -133,6 +140,7 @@ export class GraphCanvasService extends GraphFrameService {
         return super.getFrameHeight();
     };
     /** 
+     * setFrameMargin must be run befroe createCanvas.
    *if parms = -1 => keep the value that constructor create.
    *default = 20px
    */

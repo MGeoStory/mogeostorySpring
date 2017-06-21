@@ -76,7 +76,7 @@ export class SliderComponent implements OnInit {
                 }
             );
         } else {
-            console.log(false);
+            // console.log(false);
             this.filterDataAndPush(this.geoData, this.scale, this.region);
             // console.log(this.geoData);
         }
@@ -87,7 +87,7 @@ export class SliderComponent implements OnInit {
         let geoData: any = data;
         let layers: L.GeoJSON;
 
-        console.log(`${scale},${region}`);
+        // console.log(`${scale},${region}`);
         layers = L.geoJSON(geoData, {
             filter: (feature) => {
                 let r = feature.properties['region'];
