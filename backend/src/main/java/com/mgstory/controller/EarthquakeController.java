@@ -3,6 +3,8 @@ package com.mgstory.controller;
 import com.mgstory.model.EarthquakeModel;
 import com.mgstory.repository.EarthquakeRepository;
 import com.mgstory.domain.Earthquake;
+
+import com.sun.org.apache.bcel.internal.generic.ClassGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +25,7 @@ public class EarthquakeController {
     @Autowired
     EarthquakeRepository repository;
 
-    Earthquake article = new Earthquake();
+    Earthquake earthquake = new Earthquake();
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Earthquake> findAll() {
@@ -38,17 +40,19 @@ public class EarthquakeController {
     }
 
     @RequestMapping(value = "/geo/year/{min}/{max}", method = RequestMethod.GET)
-    public String findGeoByYearBetween (@PathVariable(value="min") Integer min,@PathVariable(value="max") Integer max) {
+    public String findGeoByYearBetween(@PathVariable(value = "min") Integer min,
+            @PathVariable(value = "max") Integer max) {
         // log.info(min.toString());
         // log.info(max.toString());
-        Iterable<Earthquake> es = repository.findByYearBetween(min,max);
+        Iterable<Earthquake> es = repository.findByYearBetween(min, max);
         String geojson = model.getGeoFromEarthquakes(es);
         return geojson;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Earthquake findById(@PathVariable Integer id) {
+    public Earthquake findById(@PathVariable Integer id) {   
         return repository.findById(id);
+
     }
 
     @RequestMapping(value = "/geo/{id}", method = RequestMethod.GET)
@@ -57,4 +61,6 @@ public class EarthquakeController {
         String geojson = model.getGeoFromEarthquake(e);
         return geojson;
     }
+
+    
 }
