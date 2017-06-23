@@ -7,7 +7,7 @@ import {EarthquakeService} from 'app/services/backend/earthquake.service';
 import {SliderComponent} from './slider/slider.component';
 import { ButtonsModule } from 'ng2-bootstrap';
 import { ScatterDiagramComponent } from './scatter/scatter-diagram.component';
-
+import { TableComponent } from './table/table.component';
 @NgModule({
     imports: [SharedModule, ButtonsModule],
     exports: [],
@@ -15,7 +15,8 @@ import { ScatterDiagramComponent } from './scatter/scatter-diagram.component';
         EarthquakeComponent,
         EarthquakeMapComponent,
         SliderComponent,
-        ScatterDiagramComponent
+        ScatterDiagramComponent,
+        TableComponent
         ],
     providers: [
         EarthquakeService,

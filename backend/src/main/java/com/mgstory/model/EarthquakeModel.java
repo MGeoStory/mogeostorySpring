@@ -76,6 +76,9 @@ public class EarthquakeModel {
             properties.addProperty("deep",e.getDeep());
             properties.addProperty("scale",e.getScale());
             properties.addProperty("region",e.getRegion());
+            // properties.addProperty("code",e.getCode());
+            // properties.addProperty("center",e.getCenter());
+            // properties.addProperty("date",e.getDate());
             // properties.addProperty("year",e.getYear());
 
             //{"features":[{"geometry":{"type","Point"}}]}

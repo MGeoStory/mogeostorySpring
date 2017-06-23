@@ -17,7 +17,7 @@ export class EarthquakeMapComponent implements OnInit {
     private map: L.Map;
     private layerOfEarthquakes: L.GeoJSON;
     private GEOJSON_DATA: string = 'assets/geodata/earthquake-test.json';
-    private geojsonMarkerOptions:any = {
+    private geojsonMarkerOptions: any = {
         radius: 1,
         color: "#ff7800",
         // weight: 1,
@@ -44,7 +44,7 @@ export class EarthquakeMapComponent implements OnInit {
                         // return null;
                     }
                 }).addTo(this.map)
-                this.map.setZoom(6);
+                this.map.setView([23.975, 121.973],6);
             });
     }
     // this.es.getEarthquakesG().subscribe(

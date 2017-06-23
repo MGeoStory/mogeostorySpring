@@ -25,7 +25,10 @@ export class ScatterDiagramComponent implements OnInit {
         this.os.observedGeoLayer.subscribe(
             (layer) => {
                 let data: Object[] = this.simplyGeoLayer(layer.toGeoJSON());
-
+                
+                //push to table
+                this.os.pushDataToObserved(data);
+                
                 this.gc.setFrameMargin(40, 5, -1, 60);
                 this.canvas = this.gc.createCanvas('new-scatter-diagram', '#scatter-diagram');
                 this.drawScatterDiagram(data);
@@ -112,10 +115,13 @@ export class ScatterDiagramComponent implements OnInit {
 
         geoData.map((f) => {
             data.push({
-                // 'id': f['properties']['id'],
+                'id': f['properties']['id'],
+                // 'center': f['properties']['center'],
                 'deep': f['properties']['deep'],
                 'scale': f['properties']['scale'],
-                // 'year':f['properties']['year']
+                // 'code':f['properties']['code'],
+                // 'date':f['properties']['date']
+
             })
         });
         // console.log(data);

@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "earthquake")
 public class Earthquake implements Serializable {
@@ -42,6 +40,12 @@ public class Earthquake implements Serializable {
     @Column(name = "region")
     private String region;
 
+    @Column(name = "center")
+    private String center;
+
+    @Column(name = "time_")
+    private String date;
+
     public Integer getId() {
         return id;
     }
@@ -49,6 +53,7 @@ public class Earthquake implements Serializable {
     public String getCode() {
         return code;
     }
+
     public Double getLng() {
         return lng;
     }
@@ -69,11 +74,18 @@ public class Earthquake implements Serializable {
         return region;
     }
 
-    public Integer getYear(){
+    public String getCenter() {
+        return center;
+    }
+
+    public Integer getYear() {
         return year;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public Earthquake() {
     }
-
 }
