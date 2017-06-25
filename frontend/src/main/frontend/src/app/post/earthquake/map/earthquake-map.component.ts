@@ -47,19 +47,4 @@ export class EarthquakeMapComponent implements OnInit {
                 this.map.setView([23.975, 121.973],6);
             });
     }
-    // this.es.getEarthquakesG().subscribe(
-    //     (geoData: any) => {
-    //         L.geoJSON(geoData, {
-    //             pointToLayer: (feature, latlng) => {
-    //                 // console.log(feature.properties["scale"]);
-    //                 this.geojsonMarkerOptions.radius = feature.properties["scale"]*feature.properties["scale"]/4;
-    //                 return L.circleMarker(latlng, this.geojsonMarkerOptions);
-    //             }
-    //         }).addTo(this.map);
-    //         this.map.setZoom(6);
-    //         this.timeCal[1] = new Date().getTime();
-    //         console.log("====="+(this.timeCal[1] - this.timeCal[0])/1000)+"=====";
-    //     }
-    // )
-    // }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservableService } from 'app//services/frontend//observable.service';
+import { EarthquakeService } from 'app/services/backend/earthquake.service';
 import { GraphFrameService } from 'app/services/frontend/graph-frame.service';
 import { GraphCanvasService } from 'app/services/frontend/graph-canvas.service';
 import * as d3 from 'd3';
@@ -19,24 +20,51 @@ export class ScatterDiagramComponent implements OnInit {
     private showScatterIs = false;
 
 
-    constructor(private os: ObservableService) { }
+    constructor(private os: ObservableService,private es:EarthquakeService) { }
 
     ngOnInit() {
         this.os.observedGeoLayer.subscribe(
             (layer) => {
                 let data: Object[] = this.simplyGeoLayer(layer.toGeoJSON());
-                
-                //push to table
-                this.os.pushDataToObserved(data);
-                
+
+                this.pushDataToTable(data, 7);
+
                 this.gc.setFrameMargin(40, 5, -1, 60);
                 this.canvas = this.gc.createCanvas('new-scatter-diagram', '#scatter-diagram');
                 this.drawScatterDiagram(data);
                 this.subTitle = `(此區間與區域下共計有${data.length}次有感地震)`;
-                
             }
         );
     }
+
+    pushDataToTable(data: Object[], endNumber: number) {
+        let temp: Object[] = [];
+        let result: Object[] = [];
+
+        data.sort((x, y) => {
+            return d3.descending(x['scale'], y['scale'])
+        });
+        temp = data.slice(0, endNumber);
+        // console.log(temp);
+        // console.log(temp[0]);
+
+        temp.forEach((d) => {
+            this.es.getEarthquakeById(d['id']).subscribe(
+                (data) => {
+                    // console.log(data);
+                    result.push(data);
+                    // console.log(result[3]);
+                    if (result.length == endNumber) {
+                        //push to table
+                        // console.log(result);
+                        this.os.pushDataToObserved(result);
+                    }
+                })
+            // console.log('ttttt');
+        });
+    }
+
+
 
     drawScatterDiagram(data: Object[]) {
         this.gc.getFrameMargin();
@@ -63,6 +91,7 @@ export class ScatterDiagramComponent implements OnInit {
             // .attr('class', (d) => {
             //     return String(d['id']);
             // })
+
             .attr("cx", (d) => {
                 return this.gc.xScaleLinear(d['scale']);
             })
