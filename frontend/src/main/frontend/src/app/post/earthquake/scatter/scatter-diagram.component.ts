@@ -18,9 +18,9 @@ export class ScatterDiagramComponent implements OnInit {
     private graphTitle: string = "有感地震規模與深度圖：";
     private subTitle: string = '(此區間與區域下共計有n次有感地震)';
     private showScatterIs = false;
+    private lastCirlceClass: string;
 
-
-    constructor(private os: ObservableService,private es:EarthquakeService) { }
+    constructor(private os: ObservableService, private es: EarthquakeService) { }
 
     ngOnInit() {
         this.os.observedGeoLayer.subscribe(
@@ -35,6 +35,18 @@ export class ScatterDiagramComponent implements OnInit {
                 this.subTitle = `(此區間與區域下共計有${data.length}次有感地震)`;
             }
         );
+
+
+        // hightlight the marker of deep and scale
+        this.os.observedNumber.subscribe(
+            (id) => {
+                d3.select(this.lastCirlceClass).attr('r', 2).style('fill', 'red');
+                let circleClass: string = `.s${id}`;
+                d3.select(circleClass).attr('r', 5).style('fill', 'LightSkyBlue');
+                this.lastCirlceClass = circleClass;
+            }
+        )
+
     }
 
     pushDataToTable(data: Object[], endNumber: number) {
@@ -45,26 +57,19 @@ export class ScatterDiagramComponent implements OnInit {
             return d3.descending(x['scale'], y['scale'])
         });
         temp = data.slice(0, endNumber);
-        // console.log(temp);
-        // console.log(temp[0]);
 
         temp.forEach((d) => {
             this.es.getEarthquakeById(d['id']).subscribe(
                 (data) => {
-                    // console.log(data);
                     result.push(data);
-                    // console.log(result[3]);
-                    if (result.length == endNumber) {
+                    if (result.length == temp.length) {
                         //push to table
-                        // console.log(result);
                         this.os.pushDataToObserved(result);
                     }
                 })
             // console.log('ttttt');
         });
     }
-
-
 
     drawScatterDiagram(data: Object[]) {
         this.gc.getFrameMargin();
@@ -99,7 +104,10 @@ export class ScatterDiagramComponent implements OnInit {
                 return this.gc.yScaleLinear(d['deep']);
             })
             .attr("r", 2)
-            .style("fill", 'red');
+            .style("fill", 'red')
+            .attr('class', (d) => {
+                return 's' + d['id'];
+            });
 
         this.canvas.append('g')
             .attr('class', 'yAxis')

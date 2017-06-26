@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 })
 
 export class TableComponent implements OnInit {
-    private tableTitle: string = `在地圖上點選縣市即可查看各縣市調查資料！`;
+    private tableTitle: string = `區間較大地震(規模)資訊摘要：`;
     // private table = d3.select('#earthquake-table').append('table').attr('class', 'eTable');
     // private thead = this.table.append('thead');
     // private tbody = this.table.append('tbody');
@@ -23,8 +23,6 @@ export class TableComponent implements OnInit {
     constructor(private os: ObservableService, private es: EarthquakeService) { }
 
     ngOnInit() {
-
-
         this.os.observedData.subscribe(
             (data) => {
                 console.log(data);
@@ -35,11 +33,8 @@ export class TableComponent implements OnInit {
                     d3.select('.eTable').remove();
                     this.drawTable(data);
                 }
-                this.tableTitle = `七大地震(規模)資訊摘要：`;
             });
     }
-
-
 
     drawTable(data) {
         let table = d3.select('#earthquake-table').append('table').attr('class', 'eTable');
@@ -54,7 +49,15 @@ export class TableComponent implements OnInit {
                 return d;
             });
         let rows = tbody.selectAll('tr')
-            .data(data).enter().append('tr');
+            .data(data).enter().append('tr').on('click',(d)=>{
+                // console.log(d['id']);
+                // console.log(d);
+                this.resetHighLightRows();
+                this.highLightSelectedRow(d['id']);
+                this.os.pushNumberToObserved(d['id']);
+            }).attr('class',(d)=>{
+                return 'table'+d['id'] ;
+            });
 
         let cells = rows.selectAll('td')
             // translate json to key,vlaue
@@ -69,5 +72,14 @@ export class TableComponent implements OnInit {
                 // console.log(d);
                 return d.value
             });
+    }
+
+    resetHighLightRows(){
+        d3.selectAll('tr').selectAll('td').style('background-color','white');
+    }
+
+    highLightSelectedRow(id:number):void{
+        let rowClass = `.table${id}`;
+        d3.select(rowClass).selectAll('td').style('background-color','LightSkyBlue');
     }
 }
