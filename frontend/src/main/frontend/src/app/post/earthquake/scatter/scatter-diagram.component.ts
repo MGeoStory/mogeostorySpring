@@ -42,7 +42,7 @@ export class ScatterDiagramComponent implements OnInit {
             (id) => {
                 d3.select(this.lastCirlceClass).attr('r', 2).style('fill', 'red');
                 let circleClass: string = `.s${id}`;
-                d3.select(circleClass).attr('r', 5).style('fill', 'LightSkyBlue');
+                d3.select(circleClass).attr('r', 7).style('fill', 'LightSkyBlue');
                 this.lastCirlceClass = circleClass;
             }
         )
@@ -52,11 +52,18 @@ export class ScatterDiagramComponent implements OnInit {
     pushDataToTable(data: Object[], endNumber: number) {
         let temp: Object[] = [];
         let result: Object[] = [];
+        //remove code = 小區域, because the impact is not enough to be recorded.
+        data = data.filter((d)=>{
+            // console.log(d['code']);
+            return d['code'] != '小區域';
+        })
+        // console.log(data);
 
         data.sort((x, y) => {
             return d3.descending(x['scale'], y['scale'])
         });
         temp = data.slice(0, endNumber);
+        
 
         temp.forEach((d) => {
             this.es.getEarthquakeById(d['id']).subscribe(
@@ -156,7 +163,7 @@ export class ScatterDiagramComponent implements OnInit {
                 // 'center': f['properties']['center'],
                 'deep': f['properties']['deep'],
                 'scale': f['properties']['scale'],
-                // 'code':f['properties']['code'],
+                'code':f['properties']['code'],
                 // 'date':f['properties']['date']
 
             })

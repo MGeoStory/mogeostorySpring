@@ -94,9 +94,9 @@ export class SliderComponent implements OnInit {
                 let s = feature.properties['scale'];
                 //region = get all from database, including no region rows
                 if (region == "A") {
-                    return s >= scale[0] && s <= (scale[1] + 1);
+                    return s >= scale[0] && s < (scale[1] + 1);
                 } else {
-                    return s >= scale[0] && s <= (scale[1] + 1) && r == region;
+                    return s >= scale[0] && s < (scale[1] + 1) && r == region;
                 }
             }
         });

@@ -27,7 +27,7 @@ export class EarthquakeMapComponent implements OnInit {
     private lastMarker;
 
 
-    constructor(private lms: LMapSettingService, private os: ObservableService,private es:EarthquakeService) { }
+    constructor(private lms: LMapSettingService, private os: ObservableService, private es: EarthquakeService) { }
 
     ngOnInit() {
         this.map = this.lms.initMap(this.MAPID)
@@ -46,7 +46,7 @@ export class EarthquakeMapComponent implements OnInit {
 
                         return L.circleMarker(latlng, this.geojsonMarkerOptions);
                         // return null;
-                    }, 
+                    },
                 }).addTo(this.map)
 
 
@@ -56,18 +56,22 @@ export class EarthquakeMapComponent implements OnInit {
         //get the selected row's id.
         this.os.observedNumber.subscribe(
             (id) => {
-                d3.select(this.lastMarker).style('fill', '#ff7800').style('stroke','#ff7800').style('fill-opacity','0.1');
+                d3.select(this.lastMarker).style('fill', '#ff7800').style('stroke', '#ff7800').style('fill-opacity', '0.1').style('stroke-width','3').style('stroke-opacity','0.1');;
                 let lastMarker: string = `.m${id}`;
-                d3.select(lastMarker).style('fill', 'LightSkyBlue').style('stroke','LightSkyBlue').style('fill-opacity','0.8');
+                d3.select(lastMarker).style('fill', 'LightSkyBlue').style('stroke', 'LightSkyBlue').style('fill-opacity', '1').style('stroke-width','1rem').style('stroke-opacity','0.8');
                 this.lastMarker = lastMarker;
-                
+
                 //zoom to the cetnre of marker 
                 let number = +id;
                 this.es.getEarthquakeById(number).subscribe(
-                    (data)=>{
+                    (data) => {
                         // console.log(data);
                         // console.log(data['features']);
-                        this.map.setView([data['lat'],data['lng']],6);
+                        if (data['scale'] >= 4) {
+                            this.map.setView([data['lat'], data['lng']], 8);
+                        }else{
+                            this.map.setView([data['lat'], data['lng']], 12);
+                        }
                     }
                 )
             }
