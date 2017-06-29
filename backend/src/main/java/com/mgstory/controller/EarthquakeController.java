@@ -4,7 +4,6 @@ import com.mgstory.model.EarthquakeModel;
 import com.mgstory.repository.EarthquakeRepository;
 import com.mgstory.domain.Earthquake;
 
-import com.sun.org.apache.bcel.internal.generic.ClassGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -22,6 +22,9 @@ public class Earthquake implements Serializable {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "code_yn")
+    private String codeYN;
+
     @Column(name = "lng")
     private Double lng;
 
@@ -52,6 +55,10 @@ public class Earthquake implements Serializable {
 
     public String getCode() {
         return code;
+    }
+
+    public String getCodeYN() {
+        return codeYN;
     }
 
     public Double getLng() {

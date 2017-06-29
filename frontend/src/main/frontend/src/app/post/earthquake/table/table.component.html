@@ -2,5 +2,8 @@
         <h3 class="tableTitle"><strong>{{tableTitle}}</strong></h3>
         <h4 class="subTitle">(點擊表格可於上方地圖中檢視地震震央位置)</h4>
     </div>
-<div id='earthquake-table'></div>
+<div id='earthquake-table'>
+    <img *ngIf="loadingTable" class="img-responsive" src="assets/images/loading.svg" alt="loading">
+</div>
+
 <p>本表所列之地震為交通局定義之有感地震（<a href='http://www.cwb.gov.tw/V7/service/notice/download/notice_20141231104524.pdf'>有感地震發布要點</a>)</p>

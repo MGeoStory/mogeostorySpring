@@ -33,7 +33,7 @@ export class SliderComponent implements OnInit {
 
         this.es.getEarthquakesG().subscribe(
             (geoData) => {
-                // console.log(geoData);
+                console.log(geoData);
                 this.geoData = geoData;
                 this.filterDataAndPush(this.geoData,this.scale,this.region);
             }

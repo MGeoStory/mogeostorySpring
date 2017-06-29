@@ -17,7 +17,7 @@ export class TableComponent implements OnInit {
     // private tbody = this.table.append('tbody');
     private columns = ['地震編號', '發生日期', '規模', '深度（km）', '震央位置'];
     private rowsName = ['code', 'date', 'scale', 'deep', 'center'];
-
+    private loadingTable: boolean = true;
     // private showTableIs: boolean = false;
 
     constructor(private os: ObservableService, private es: EarthquakeService) { }
@@ -25,9 +25,9 @@ export class TableComponent implements OnInit {
     ngOnInit() {
         this.os.observedData.subscribe(
             (data) => {
-                console.log(data);
+                // console.log(data);
                 if (d3.select('.eTable').empty()) {
-                    console.log(d3.select('.eTable').empty());
+                    // console.log(d3.select('.eTable').empty());
                     this.drawTable(data);
                 } else {
                     d3.select('.eTable').remove();
@@ -49,14 +49,14 @@ export class TableComponent implements OnInit {
                 return d;
             });
         let rows = tbody.selectAll('tr')
-            .data(data).enter().append('tr').on('click',(d)=>{
+            .data(data).enter().append('tr').on('click', (d) => {
                 // console.log(d['id']);
                 // console.log(d);
                 this.resetHighLightRows();
                 this.highLightSelectedRow(d['id']);
                 this.os.pushNumberToObserved(d['id']);
-            }).attr('class',(d)=>{
-                return 'table'+d['id'] ;
+            }).attr('class', (d) => {
+                return 'table' + d['id'];
             });
 
         let cells = rows.selectAll('td')
@@ -72,14 +72,16 @@ export class TableComponent implements OnInit {
                 // console.log(d);
                 return d.value
             });
+            
+        this.loadingTable = false;
     }
 
-    resetHighLightRows(){
-        d3.selectAll('tr').selectAll('td').style('background-color','white');
+    resetHighLightRows() {
+        d3.selectAll('tr').selectAll('td').style('background-color', 'white');
     }
 
-    highLightSelectedRow(id:number):void{
+    highLightSelectedRow(id: number): void {
         let rowClass = `.table${id}`;
-        d3.select(rowClass).selectAll('td').style('background-color','LightSkyBlue');
+        d3.select(rowClass).selectAll('td').style('background-color', 'LightSkyBlue');
     }
 }

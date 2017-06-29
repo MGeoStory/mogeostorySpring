@@ -16,7 +16,7 @@ export class EarthquakeComponent implements OnInit {
     ngOnInit() {
         this.acs.getArticleById(3).subscribe(
             article => {
-                console.log(article["title"]);
+                // console.log(article["title"]);
                 this.title = article["title"];
                 let t = d3.timeFormat("%Y/%m/%d");
                 this.date = t(article["postDate"]);

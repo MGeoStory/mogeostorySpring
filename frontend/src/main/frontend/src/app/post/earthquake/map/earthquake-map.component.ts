@@ -17,6 +17,9 @@ export class EarthquakeMapComponent implements OnInit {
     private map: L.Map;
     private layerOfEarthquakes: L.GeoJSON;
     private GEOJSON_DATA: string = 'assets/geodata/earthquake-test.json';
+    private loadingImage: string = 'assets/images/loading.svg';
+    private loadingLayer: L.ImageOverlay;
+
     private geojsonMarkerOptions: any = {
         radius: 1,
         color: "#ff7800",
@@ -30,7 +33,8 @@ export class EarthquakeMapComponent implements OnInit {
     constructor(private lms: LMapSettingService, private os: ObservableService, private es: EarthquakeService) { }
 
     ngOnInit() {
-        this.map = this.lms.initMap(this.MAPID)
+        this.map = this.lms.initMap(this.MAPID);
+        this.loadingLayer = L.imageOverlay(this.loadingImage, this.map.getBounds()).addTo(this.map);
         this.os.observedGeoLayer.subscribe(
             (geoLayer) => {
                 // this.map.remove();
@@ -48,17 +52,16 @@ export class EarthquakeMapComponent implements OnInit {
                         // return null;
                     },
                 }).addTo(this.map)
-
-
+                this.loadingLayer.remove();
                 this.map.setView([23.975, 121.973], 6);
             });
 
         //get the selected row's id.
         this.os.observedNumber.subscribe(
             (id) => {
-                d3.select(this.lastMarker).style('fill', '#ff7800').style('stroke', '#ff7800').style('fill-opacity', '0.1').style('stroke-width','3').style('stroke-opacity','0.1');;
+                d3.select(this.lastMarker).style('fill', '#ff7800').style('stroke', '#ff7800').style('fill-opacity', '0.1').style('stroke-width', '3').style('stroke-opacity', '0.1');;
                 let lastMarker: string = `.m${id}`;
-                d3.select(lastMarker).style('fill', 'LightSkyBlue').style('stroke', 'LightSkyBlue').style('fill-opacity', '1').style('stroke-width','1rem').style('stroke-opacity','0.8');
+                d3.select(lastMarker).style('fill', 'LightSkyBlue').style('stroke', 'LightSkyBlue').style('fill-opacity', '1').style('stroke-width', '1rem').style('stroke-opacity', '0.8');
                 this.lastMarker = lastMarker;
 
                 //zoom to the cetnre of marker 
@@ -69,7 +72,7 @@ export class EarthquakeMapComponent implements OnInit {
                         // console.log(data['features']);
                         if (data['scale'] >= 4) {
                             this.map.setView([data['lat'], data['lng']], 8);
-                        }else{
+                        } else {
                             this.map.setView([data['lat'], data['lng']], 12);
                         }
                     }

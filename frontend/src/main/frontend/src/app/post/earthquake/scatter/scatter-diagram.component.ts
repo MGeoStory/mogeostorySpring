@@ -19,6 +19,7 @@ export class ScatterDiagramComponent implements OnInit {
     private subTitle: string = '(此區間與區域下共計有n次有感地震)';
     private showScatterIs = false;
     private lastCirlceClass: string;
+    private loadingScatter: boolean = true;
 
     constructor(private os: ObservableService, private es: EarthquakeService) { }
 
@@ -53,7 +54,7 @@ export class ScatterDiagramComponent implements OnInit {
         let temp: Object[] = [];
         let result: Object[] = [];
         //remove code = 小區域, because the impact is not enough to be recorded.
-        data = data.filter((d)=>{
+        data = data.filter((d) => {
             // console.log(d['code']);
             return d['code'] != '小區域';
         })
@@ -63,7 +64,7 @@ export class ScatterDiagramComponent implements OnInit {
             return d3.descending(x['scale'], y['scale'])
         });
         temp = data.slice(0, endNumber);
-        
+
 
         temp.forEach((d) => {
             this.es.getEarthquakeById(d['id']).subscribe(
@@ -141,6 +142,8 @@ export class ScatterDiagramComponent implements OnInit {
             .attr('text-anchor', 'middle')
             .attr('writing-mode', 'tb');
         // .attr('transform','rotate(180)');
+
+        this.loadingScatter = false;
     }
 
     /**
@@ -163,7 +166,7 @@ export class ScatterDiagramComponent implements OnInit {
                 // 'center': f['properties']['center'],
                 'deep': f['properties']['deep'],
                 'scale': f['properties']['scale'],
-                'code':f['properties']['code'],
+                'code': f['properties']['code'],
                 // 'date':f['properties']['date']
 
             })
