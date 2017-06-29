@@ -1,25 +1,55 @@
 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-    <article-earthquake-slider></article-earthquake-slider>
-</div>
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-    <post-earthquake-map></post-earthquake-map>
-</div>
-
-
-<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-    <div class="row">
-        <div class="clo-lg-6 col-md-6">
-            <earthquake-scatter-diagram></earthquake-scatter-diagram>
-        </div>
-        <div class="col-lg-6 col-md-6">
-             <earthquake-table></earthquake-table>
-        </div>
+    <h2>{{title}}</h2>
+    <h4>日期：{{date}} | 作者: <a href="{{link}}">{{author}}</a></h4>
+    <div class="abstract">
+        <blockquote>
+            <p>自1995年至2017年6月左右，中央氣象局共計發布9,816次有感地震報告，其中規模超過7級的地震共有6個，而其中僅有一個震央在台灣本島上，那就是1999年的921大地震。</p>
+        </blockquote>
+        <!--<p class="line1">透過檢視地圖中2000年至2015年的家戶所得資料，可以發現幾件很不一樣的事情：</p>-->
+        <ul class="listPoints">
+            <li>921地震無疑是近20年來災情最嚴重的地震，自9月21日凌晨1點47分發生主震後，接下來的五日內接連發生了7次規模超過6級的餘震。</li>
+            <li>若依氣象局的區域劃分，在這9,816次有感地震報告中，震央多數在台灣本島以外(4,412次)、東部地區有(3,337次)，其餘北、中、南部則佔2,067次(約21%)。(但依據地震特性，台灣地震區域另有其他的劃分方式)</li>
+            <li>若以2006年來區分出前後十年，可發現近十年的有感地震比前一個十年倍增了1倍(6,800次比3,421次)，各區域均有顯著成長，但中部地區的地震統計次數卻無太大之差異(602次比549次)。</li>
+        </ul>
+    </div>
+    <div>
+        <br>
+        <h3>
+            - 相較於我們所看到的，更重要是你如何解讀 -</h3>
+        <blockquote>
+            <p>於下方
+                <u>調整時間與規模區間</u>可以看到該時間區間下的地震規模與深度分佈圖與其較大地震資訊摘要;
+                <u>點選表格</u>上的地震資訊，則可於地圖與分佈圖檢視地震所在位置。</p>
+        </blockquote>
     </div>
 </div>
-<div class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1">
-    <br> 文章資料來源：
-    <ul>
-        <li><a href="http://scweb.cwb.gov.tw/EarthquakeAdv.aspx?ItemId=57&loc=tw">有感地震報告進階查詢</a></li>
-        <li><a href="http://scweb.cwb.gov.tw/EarthquakeAdv.aspx?ItemId=61&loc=tw#">測站查詢</a></li>
-    </ul>
-</div>
+<div>
+
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <article-earthquake-slider></article-earthquake-slider>
+    </div>
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <post-earthquake-map></post-earthquake-map>
+    </div>
+
+
+    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="clo-lg-6 col-md-6">
+                <earthquake-scatter-diagram></earthquake-scatter-diagram>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <earthquake-table></earthquake-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-lg-offset-1 col-md-9 col-md-offset-1">
+        <br> 文章資料來源：
+        <ul>
+            <li><a href="http://scweb.cwb.gov.tw/EarthquakeAdv.aspx?ItemId=57&loc=tw">有感地震報告進階查詢</a></li>
+            <li><a href="http://scweb.cwb.gov.tw/EarthquakeAdv.aspx?ItemId=61&loc=tw#">測站查詢</a></li>
+            <li><a href="http://gdms.cwb.gov.tw/20/">地震測報中心20年專刊</a></li>
+
+            
+        </ul>
+    </div>
